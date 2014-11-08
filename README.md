@@ -1,1 +1,1 @@
-Testing travis settup correctly 
+App that tells me if it is ok to cycle to work :D
