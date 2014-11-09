@@ -12,11 +12,10 @@ angular.module('canIcycleApp')
 
   
   	$scope.getWeather = function(postcode) {
-  		var encodedPostCode = encodeURIComponent(postcode);
   		// set the weather data using the world weather online service
-  		$scope.weatherData = worldWeatherOnline.getPostCodeData(encodedPostCode);
-
-  		console.log($scope.weatherData);
+  		worldWeatherOnline.getPostCodeData(postcode).then(function(data){
+  			$scope.weatherData = data;
+		});
   	};
   	
   });
