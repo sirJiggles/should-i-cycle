@@ -6,5 +6,23 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 // the main namespace
 .main {
-    
+	.register {
+
+		h1 {
+			text-align: center;
+		}
+		
+		// rows for the sign up form
+	    .input-group {
+	    	margin-bottom: 20px;
+	    }
+	    // strange that this is an issue
+	    .input-group-addon.btn {
+	    	top: 0;
+	    }
+	    button {
+	    	width: 100%;
+	    	font-size: 1.7em;
+	    }
+    }
 }
