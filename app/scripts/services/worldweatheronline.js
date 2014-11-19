@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name canIcycleApp.worldWeatherOnline
+ * @name shouldICycleApp.worldWeatherOnline
  * @description
  * # worldWeatherOnline
- * Service in the canIcycleApp.
+ * Service in the shouldICycleApp.
  */
-angular.module('canIcycleApp')
+angular.module('shouldICycleApp')
 	.service('worldWeatherOnline', function ($http, $log, $q) {
 		
 

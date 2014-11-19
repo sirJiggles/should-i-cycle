@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name canIcycleApp
+ * @name shouldICycleApp
  * @description
- * # canIcycleApp
+ * # shouldICycleApp
  *
  * Main module of the application.
  */
 angular
-  .module('canIcycleApp', [
+  .module('shouldICycleApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',

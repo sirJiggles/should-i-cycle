@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name canIcycleApp.controller:MainCtrl
+ * @name shouldICycleApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the canIcycleApp
+ * Controller of the shouldICycleApp
  */
-angular.module('canIcycleApp')
+angular.module('shouldICycleApp')
   .controller('MainCtrl', function ($scope, worldWeatherOnline) {
 
   

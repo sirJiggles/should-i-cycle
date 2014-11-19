@@ -3,7 +3,7 @@
 describe('Service: worldWeatherOnline', function () {
 
   // load the service's module
-  beforeEach(module('canIcycleApp'));
+  beforeEach(module('shouldICycleApp'));
 
   // instantiate service
   var worldWeatherOnline;
