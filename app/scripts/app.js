@@ -23,7 +23,11 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/add-journey', {
+        templateUrl: 'views/add-journey.html',
+        controller: 'AddJourneyCtrl'
+      })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/404.html'
       });
   });

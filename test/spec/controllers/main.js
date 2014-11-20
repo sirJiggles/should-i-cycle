@@ -57,17 +57,5 @@ describe('Controller: MainCtrl', function () {
         
     });
 
-    it('should be able to register a user', function() {
-        this.scope.registerUser('Gareth Fuller', 'PE29 2BN');
-        this.scope.$root.$digest();
-        expect(this.scope.data.registered).toBeDefined();
-        expect(this.scope.data.registered).toBeTruthy();
-        expect(this.scope.data.postCode).toBeDefined();
-        expect(this.scope.data.postCode).toEqual('PE29 2BN');
-        expect(this.scope.data.name).toBeDefined();
-        expect(this.scope.data.name).toEqual('Gareth Fuller');
-    });
-    
-
 });
     

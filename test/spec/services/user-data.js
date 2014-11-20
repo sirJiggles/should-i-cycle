@@ -43,7 +43,26 @@ describe('Service: userData', function () {
         var regFlag = this.userData.getRegistered();
         expect(regFlag).toBe(true);
     });
-    
 
+    it('should be able to save a journey time to the datastore', function(){
+        this.userData.addJourney('07:00');
+        var journey = this.userData.getJourney(0);
+        expect(journey).toEqual('07:00');
+    });
+
+    it('should return false if nothing is passed to the add journey func', function() {
+        var ret = this.userData.addJourney();
+        expect(ret).toBe(false);
+    });
+
+    it('should be able to add muliple items to the journeys array', function() {
+        this.userData.addJourney('05:10');
+        this.userData.addJourney('05:20');
+        var journeys = this.userData.getJourneys();
+        expect(journeys).toBeDefined();
+        expect(journeys[0]).toBeDefined();
+        expect(journeys[1]).toBeDefined();
+        expect(journeys[1]).toEqual('05:20');
+    });
 });
     

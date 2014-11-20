@@ -59,6 +59,26 @@ angular.module('shouldICycleApp')
 				return userData.name;
 			},
 
+			addJourney: function(time) {
+				if (typeof time === 'undefined') {
+					return false;
+				}
+				// define if not defined
+				userData = userData || {};
+				userData.journeys = userData.journeys || [];
+
+				userData.journeys.push(time);
+				this.save();
+			},
+
+			getJourney: function(index) {
+				return (userData.journeys[index]) ? userData.journeys[index] : false;
+			},
+
+			getJourneys: function() {
+				return (userData.journeys) ? userData.journeys : false;
+			},
+
 			getData: function(){
 				return userData;
 			},
