@@ -8,19 +8,26 @@
  * Controller of the shouldICycleApp
  */
 angular.module('shouldICycleApp')
-  .controller('MainCtrl', function ($scope, worldWeatherOnline) {
+	.controller('MainCtrl', function ($scope, worldWeatherOnline, userData) {
 
-  	// for now we are going to fake some storred data structure
-  	$scope.data = {
+	  	// get the local storage data
+	  	$scope.data = userData.getData();
 
-  	};
+	  	console.log($scope.data);
 
-  
-  	$scope.getWeather = function(postcode) {
-  		// set the weather data using the world weather online service
-  		worldWeatherOnline.getPostCodeData(postcode).then(function(data){
-  			$scope.weatherData = data;
-		});
-  	};
+	    
+	    // the get weather function
+	  	$scope.getWeather = function(postcode) {
+	  		// set the weather data using the world weather online service
+			worldWeatherOnline.getPostCodeData(postcode).then(function(data){
+		        $scope.weatherData = data;
+		  	});
+	      
+  		};
+
+	    $scope.registerUser = function() {
+	    	$scope.data = userData.registerUser($scope.name, $scope.postCode);
+	    	console.log($scope.data);
+	    };
   	
-  });
+  	});

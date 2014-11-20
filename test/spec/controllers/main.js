@@ -6,13 +6,15 @@ describe('Controller: MainCtrl', function () {
     beforeEach(module('shouldICycleApp'));
 
     // Initialize the controller and set up the dependancies
-    beforeEach(inject(function ($controller, $rootScope, $httpBackend, _worldWeatherOnline_) {
+    beforeEach(inject(function ($controller, $rootScope, $httpBackend, _worldWeatherOnline_, _userData_) {
         this.scope = $rootScope.$new();
         this.$httpBackend = $httpBackend;
         this.worldWeatherOnline = _worldWeatherOnline_;
+        this.userData = _userData_;
         this.dummyWeatherData = {data:{weather:['day1','day2','day3','day4','day5']}};
         $controller('MainCtrl', {
             $scope: this.scope,
+            userData: _userData_,
             worldWeatherOnline: _worldWeatherOnline_
         });
     }));
@@ -53,6 +55,17 @@ describe('Controller: MainCtrl', function () {
         // should have last day of weather
         expect(this.scope.weatherData.data .weather[4]).toBeDefined();
         
+    });
+
+    it('should be able to register a user', function() {
+        this.scope.registerUser('Gareth Fuller', 'PE29 2BN');
+        this.scope.$root.$digest();
+        expect(this.scope.data.registered).toBeDefined();
+        expect(this.scope.data.registered).toBeTruthy();
+        expect(this.scope.data.postCode).toBeDefined();
+        expect(this.scope.data.postCode).toEqual('PE29 2BN');
+        expect(this.scope.data.name).toBeDefined();
+        expect(this.scope.data.name).toEqual('Gareth Fuller');
     });
     
 
