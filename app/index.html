@@ -8,6 +8,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -21,15 +22,17 @@
 
     <!-- Add your site or application content here -->
     <section class="container">
-      <header></header>
+    	<div class="col-md-3"></div>
+    	<div class="col-md-6">
+	      	<header class="row">
+				<h1>Should I Cycle?</h1>
+	      	</header>
 
-      <div ng-view="">
+			<div ng-view=""></div>
 
-      </div>
-
-      <footer>
-
-      </footer>
+			<footer></footer>
+		</div>
+		<div class="col-md-3"></div>
     </section>
 
 
@@ -70,6 +73,8 @@
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/services/worldweatheronline.js"></script>
     <script src="scripts/services/userdata.js"></script>
+    <script src="scripts/directives/register-form.js"></script>
+    <script src="scripts/directives/add-first-journey.js"></script>
     <!-- endbuild -->
 </body>
 </html>

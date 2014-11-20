@@ -11,7 +11,7 @@ angular.module('shouldICycleApp')
 	.factory('userData', function () {
 		
 		// get the data for the API
-		var ref = 'should-i-cycle-data',
+		var ref = 'should-i-cycle',
 			userData = JSON.parse(window.localStorage.getItem(ref));
 
 		return {

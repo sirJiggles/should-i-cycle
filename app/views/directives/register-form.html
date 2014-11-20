@@ -1,0 +1,17 @@
+<section class="row register">
+    <form name="registerForm">
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+            <input type="text" name="name" class="form-control" ng-model="name" placeholder="Username" required>
+        </div>
+    
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon"><i class="fa fa-home"></i></span>
+            <input type="text" name="postcode" class="form-control" ng-model="postCode" placeholder="Post Code" required>
+        </div>
+   
+        <button type="button" class="btn btn-success" ng-disabled="registerForm.$invalid" ng-click="registerUser()" >
+            <span class="fa fa-bicycle" aria-hidden="true"></span> Start
+        </button>
+    </form>
+</section>

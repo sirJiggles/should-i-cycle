@@ -1,17 +1,19 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+@import "components-font-awesome/scss/font-awesome.scss";
 // endbower
+
+// there can be only one!
+h1 {
+	text-align: center;
+	margin: 20px 0 20px 0;
+}
 
 
 // the main namespace
 .main {
 	.register {
-
-		h1 {
-			text-align: center;
-		}
-		
 		// rows for the sign up form
 	    .input-group {
 	    	margin-bottom: 20px;
@@ -25,4 +27,19 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 	    	font-size: 1.7em;
 	    }
     }
+
+    // add first journey section
+    .add-first-journey {
+    	a {
+    		font-size: 1.2em;
+    		max-width: 300px;
+    		margin: 0 auto;
+    		display: block;
+    	}
+    }
+}
+
+// this is the route for the add journey section
+.add-journey {
+
 }
