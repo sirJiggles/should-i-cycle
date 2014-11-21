@@ -8,14 +8,12 @@
  * Directive in the shouldICycleApp.
  */
 angular.module('shouldICycleApp')
-	.directive('journeys', function (userData) {
+	.directive('journeys', function () {
 		return {
 			restrict: 'E',
 			replace: true,
 			templateUrl: 'views/directives/journeys.html',
-			link: function(scope) {
-				// using the user data API get the journeys for the scope to loop through
-				scope.journeys = userData.getJourneys();
+			link: function() {
 			}
 		};
 	});

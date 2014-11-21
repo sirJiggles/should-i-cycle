@@ -22,9 +22,9 @@ angular.module('shouldICycleApp')
 					// make sure we have a correct journey, then set msg and redirect
 					if (formSubmission) {
 						$location.path('/');
-						growl.success('Journey added', {title: 'Success', ttl: 3000});
+						growl.success('Journey added', {title: 'Success'});
 					}else {
-						growl.error('Unable to add journey! Please try again', {title: 'Error', ttl: 3000});
+						growl.error('Unable to add journey! Please try again', {title: 'Error'});
 					}
 				};
 			}

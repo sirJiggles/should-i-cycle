@@ -3,10 +3,10 @@
     <!-- The register form, only show if not registered -->
     <register-form ng-show="!data.registered" ng-cloak></register-form>
 
-    <!-- The add new journey section, show if registered but ... no journeys added -->
-    <add-first-journey ng-show="data.registered && !data.journeys" ng-cloak></add-first-journey>
-
     <!-- The current journeys section, show this if they have registered and have some journeys in -->
     <journeys ng-show="data.registered && data.journeys" ng-cloak></journeys>
+
+    <!-- The add new journey section, show if registered -->
+    <add-journey ng-show="data.registered" ng-cloak></add-journey>
     
 </div>

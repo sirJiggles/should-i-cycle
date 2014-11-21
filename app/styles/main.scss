@@ -2,6 +2,35 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
+@import "compass/css3";
+@import "includes/_mixins";
+
+// Styles for the main layout of the site
+body {	
+
+	&:before {
+		background: url('/images/bg.jpg') no-repeat center center fixed;
+		@include background-size(cover);
+		@include pseudoShape(100%, 100%);
+		top: 0;
+		left: 0;
+	}
+
+	.glass {
+		@include pseudoShape(100%, 100%);
+		top: 0;
+		left: 0;
+		background-color: black;
+		@include opacity(0.6);
+	}
+}
+
+// growl message overides
+.growl-container.growl-fixed.bottom-center {
+	left: auto !important;
+	margin: 0 !important;
+	right: 10px;
+}
 
 // there can be only one!
 h1 {
@@ -9,11 +38,11 @@ h1 {
 	margin: 20px 0 20px 0;
 
 	a {
-		color: #333;
+		color: white;
 		text-decoration: none;
 
 		&:hover {
-			color: #333;
+			color: white;
 			text-decoration: none;
 		}
 	}
@@ -35,18 +64,48 @@ h1 {
 
 // the main namespace
 .main {
-
-    // add first journey section
-    .add-first-journey {
-    	/*a {
-    		max-width: 300px;
-    		margin: 0 auto;
-    		display: block;
-    	}*/
-    }
+	
 }
 
 // this is the route for the add journey section
 .add-journey {
 
+}
+
+// the journeys accordian
+.journeys {
+
+	.accordion-toggle {
+		display: block;
+		text-decoration: none;
+		width: 100%;
+		padding-right: 50px;
+		position: relative;
+
+		&:hover {
+			text-decoration: none;
+		}
+
+		.fa-trash,
+		.fa-edit {
+			position: absolute;
+			top: 0;
+		}
+
+		.fa-trash {
+			right: 0px;
+
+			&:hover {
+				color: red;
+			}
+		}
+
+		.fa-edit {
+			right: 20px;
+
+			&:hover {
+				color: green;
+			}
+		}
+	}
 }

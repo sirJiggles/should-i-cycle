@@ -1,5 +1,12 @@
 <div class="row journeys">
-    <div ng-repeat="journey in data.journeys">
-    	<h3>{{name}} at {{time}}</h3>
-	</div>   
+	<accordion close-others="true">
+		<accordion-group ng-repeat="journey in data.journeys track by $index">
+			<accordion-heading>
+			    {{journey.name}} at {{journey.time}} 
+			    <i class="pull-right fa fa-trash"></i>
+			    <i class="pull-right fa fa-edit"></i>
+			</accordion-heading>
+			Weather data for the journey to go here!!
+		</accordion-group>
+  	</accordion>
 </div>

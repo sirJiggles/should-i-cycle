@@ -1,0 +1,7 @@
+@mixin pseudoShape($width, $height) {
+	position: absolute;
+	content: '';
+	speak: none;
+	width: $width;
+	height: $height;
+}

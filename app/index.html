@@ -8,24 +8,29 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="bower_components/angular-growl-v2/angular-growl.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="bower_components/angular-growl-v2/build/angular-growl.css" />
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
     <!-- endbuild -->
   </head>
   <body ng-app="shouldICycleApp">
+
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+
+    <!-- the opacity bg -->
+    <div class="glass"></div>
+
     <section class="container">
 
     	<div class="col-md-3"></div>
     	<div class="col-md-6">
 	      	<header class="row">
-				<h1><a href="/" title="Home">Should I Cycle?</a></h1>
+				<h1><a href="/#/" title="Home">Should I Cycle?</a></h1>
 	      	</header>
 
 	      	<!-- flash messages -->
@@ -83,8 +88,13 @@
     <script src="scripts/services/user-data.js"></script>
 
     <script src="scripts/directives/register-form.js"></script>
-    <script src="scripts/directives/add-first-journey.js"></script>
+    <script src="scripts/directives/add-journey.js"></script>
     <script src="scripts/directives/add-journey-form.js"></script>
+    <script src="scripts/directives/journeys.js"></script>
+
+    <!-- could not install via bower without major angular conflicts!! -->
+    <script src="vendor/ui-bootstrap-custom-0.12.0.js"></script>
+    <script src="vendor/ui-bootstrap-custom-tpls-0.12.0.js"></script>
     <!-- endbuild -->
 </body>
 </html>

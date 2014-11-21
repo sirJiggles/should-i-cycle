@@ -2,17 +2,17 @@
 
 /**
  * @ngdoc directive
- * @name shouldICycleApp.addFirstJourney
+ * @name shouldICycleApp.addJourney
  * @description
- * # addFirstJourney
+ * # addJourney
  * Directive in the shouldICycleApp.
  */
 angular.module('shouldICycleApp')
-	.directive('addFirstJourney', function () {
+	.directive('addJourney', function () {
 		return {
 			restrict: 'E',
 			replace: true,
-			templateUrl: 'views/directives/add-first-journey.html',
+			templateUrl: 'views/directives/add-journey.html',
 			link: function() {
 				// link me!
 			}
