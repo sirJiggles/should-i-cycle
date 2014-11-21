@@ -9,7 +9,7 @@
  */
 angular.module('shouldICycleApp')
 	.controller('MainCtrl', function ($scope, worldWeatherOnline, userData) {
-
+		
 	  	// get the local storage data
 	  	$scope.data = userData.getData();
 

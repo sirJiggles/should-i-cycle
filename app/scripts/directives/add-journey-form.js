@@ -8,13 +8,25 @@
  * Directive in the shouldICycleApp.
  */
 angular.module('shouldICycleApp')
-	.directive('addJourneyForm', function () {
+	.directive('addJourneyForm', function ($location, userData, growl) {
 		return {
 			restrict: 'E',
 			replace: true,
 			templateUrl: 'views/directives/add-journey-form.html',
-			link: function() {
-				// link me!
+			link: function(scope) {
+
+				scope.addJourney = function() {
+					// add the journey and redirect home
+					var formSubmission = userData.addJourney(scope.journeyTime, scope.journeyName);
+
+					// make sure we have a correct journey, then set msg and redirect
+					if (formSubmission) {
+						$location.path('/');
+						growl.success('Journey added', {title: 'Success', ttl: 3000});
+					}else {
+						growl.error('Unable to add journey! Please try again', {title: 'Error', ttl: 3000});
+					}
+				};
 			}
 		};
 	});

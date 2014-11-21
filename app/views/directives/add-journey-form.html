@@ -1,11 +1,16 @@
 <div class="row">
-	<form name="addJourney">
+	<form name="addJourneyForm">
 		<div class="input-group input-group-lg">
-            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-            <input type="time" name="name" class="form-control" ng-model="time" placeholder="Time" required>
+            <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+            <input type="text" name="name" class="form-control" ng-model="journeyName" placeholder="Journey Name" required />
         </div>
 
-        <button type="button" class="btn btn-success" ng-disabled="addJourney.$invalid" ng-click="addJourney()">
+		<div class="input-group input-group-lg">
+            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+            <input type="time" name="time" class="form-control" ng-model="journeyTime" required />
+        </div>
+
+        <button type="button" class="btn btn-success" ng-disabled="addJourneyForm.$invalid" ng-click="addJourney()">
             Add Journey <i class="fa fa-plus-circle" aria-hidden="true"></i>
         </button>
 	</form>

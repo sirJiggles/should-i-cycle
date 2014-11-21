@@ -45,9 +45,10 @@ describe('Service: userData', function () {
     });
 
     it('should be able to save a journey time to the datastore', function(){
-        this.userData.addJourney('07:00');
+        this.userData.addJourney('07:00', 'Journey One');
         var journey = this.userData.getJourney(0);
-        expect(journey).toEqual('07:00');
+        expect(journey.time).toEqual('07:00');
+        expect(journey.name).toEqual('Journey One');
     });
 
     it('should return false if nothing is passed to the add journey func', function() {
@@ -56,13 +57,17 @@ describe('Service: userData', function () {
     });
 
     it('should be able to add muliple items to the journeys array', function() {
-        this.userData.addJourney('05:10');
-        this.userData.addJourney('05:20');
+        this.userData.addJourney('05:10', 'Journey New One');
+        this.userData.addJourney('05:20', 'Journey New Two');
         var journeys = this.userData.getJourneys();
         expect(journeys).toBeDefined();
         expect(journeys[0]).toBeDefined();
         expect(journeys[1]).toBeDefined();
-        expect(journeys[1]).toEqual('05:20');
+        expect(journeys[0].time).toEqual('05:10');
+        expect(journeys[0].name).toEqual('Journey New One');
+        expect(journeys[1].time).toEqual('05:20');
+        expect(journeys[1].name).toEqual('Journey New Two');
     });
+
 });
     

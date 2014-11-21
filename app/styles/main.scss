@@ -7,6 +7,16 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 h1 {
 	text-align: center;
 	margin: 20px 0 20px 0;
+
+	a {
+		color: #333;
+		text-decoration: none;
+
+		&:hover {
+			color: #333;
+			text-decoration: none;
+		}
+	}
 }
 
 // rows for the sign up form
