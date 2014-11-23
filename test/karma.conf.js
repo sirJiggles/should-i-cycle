@@ -27,9 +27,11 @@ module.exports = function(config) {
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/angular-growl-v2/build/angular-growl.js',
+      'app/vendor/ui-bootstrap-custom-0.12.0.js',
+      'app/vendor/ui-bootstrap-custom-tpls-0.12.0.js',
       'app/scripts/**/*.js',
-      'test/mock/**/*.js',
-      'test/spec/**/*.js',
+      'test/mock/unit/**/*.js',
+      'test/spec/unit/**/*.js',
       'app/views/directives/*.html'
     ],
 

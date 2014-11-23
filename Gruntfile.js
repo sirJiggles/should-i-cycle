@@ -27,6 +27,9 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
+    // Protractor settings
+
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
@@ -41,8 +44,8 @@ module.exports = function (grunt) {
         }
       },
       jsTest: {
-        files: ['test/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'karma']
+        files: ['test/spec/**/**/*.js'],
+        tasks: ['newer:jshint:test', 'karma', 'protractor']
       },
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -126,7 +129,7 @@ module.exports = function (grunt) {
         options: {
           jshintrc: 'test/.jshintrc'
         },
-        src: ['test/spec/{,*/}*.js']
+        src: ['test/spec/**/**/*.js']
       }
     },
 
@@ -384,7 +387,26 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
-    }
+    },
+
+    protractor: {
+		options: {
+				configFile: "node_modules/protractor/referenceConf.js", // Default config file
+				keepAlive: true, // If false, the grunt process stops when the test fails.
+				noColor: false, // If true, protractor will not use colors in its output.
+				args: {
+				// Arguments passed to the command
+			}
+		},
+		your_target: {   // Grunt requires at least one target to run so you can simply put 'all: {}' here too.
+			options: {
+				configFile: "test/e2e.conf.js", // Target-specific config file
+				args: {} // Target-specific arguments
+			}
+		},
+	},
+
+
   });
 
 
@@ -403,17 +425,13 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve:' + target]);
-  });
-
   grunt.registerTask('test', [
     'clean:server',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma'
+    'karma',
+    'protractor'
   ]);
 
   grunt.registerTask('build', [
