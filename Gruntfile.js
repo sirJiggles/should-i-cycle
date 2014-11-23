@@ -444,6 +444,14 @@ module.exports = function (grunt) {
     'protractor'
   ]);
 
+  grunt.registerTask('test-travis', [
+	'clean:server',
+    'concurrent:test',
+    'autoprefixer',
+    'connect:test',
+    'karma'
+  ]);
+
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',

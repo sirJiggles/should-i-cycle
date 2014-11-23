@@ -30,18 +30,16 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "load-grunt-tasks": "^0.4.0",
     "time-grunt": "^0.3.1",
-    "karma-ng-html2js-preprocessor": "^0.1.2"
+    "karma-ng-html2js-preprocessor": "^0.1.2",
+    "grunt-protractor-runner": "^1.1.4",
+    "grunt-protractor-webdriver": "^0.1.9",
+    "grunt-shell": "^1.1.1",
+    "protractor": "^1.4.0"
   },
   "engines": {
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "grunt test"
-  },
-  "dependencies": {
-    "grunt-protractor-runner": "^1.1.4",
-    "grunt-protractor-webdriver": "^0.1.9",
-    "grunt-shell": "^1.1.1",
-    "protractor": "^1.4.0"
+    "test": "grunt test-travis"
   }
 }
