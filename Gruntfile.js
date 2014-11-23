@@ -27,9 +27,6 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
-    // Protractor settings
-
-
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
@@ -391,14 +388,14 @@ module.exports = function (grunt) {
 
     protractor: {
 		options: {
-				configFile: "node_modules/protractor/referenceConf.js", // Default config file
-				keepAlive: true, // If false, the grunt process stops when the test fails.
-				noColor: false, // If true, protractor will not use colors in its output.
-				args: {
+			configFile: "node_modules/protractor/referenceConf.js", // Default config file
+			keepAlive: true, // If false, the grunt process stops when the test fails.
+			noColor: false, // If true, protractor will not use colors in its output.
+			args: {
 				// Arguments passed to the command
 			}
 		},
-		your_target: {   // Grunt requires at least one target to run so you can simply put 'all: {}' here too.
+		default: {   // Grunt requires at least one target to run so you can simply put 'all: {}' here too.
 			options: {
 				configFile: "test/e2e.conf.js", // Target-specific config file
 				args: {} // Target-specific arguments
@@ -406,6 +403,10 @@ module.exports = function (grunt) {
 		},
 	},
 
+	protractor_webdriver: {
+	    options: {},
+	    default: {},
+	  },
 
   });
 
@@ -431,6 +432,7 @@ module.exports = function (grunt) {
     'autoprefixer',
     'connect:test',
     'karma',
+    'protractor_webdriver',
     'protractor'
   ]);
 
