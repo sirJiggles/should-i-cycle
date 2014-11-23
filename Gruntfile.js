@@ -406,7 +406,14 @@ module.exports = function (grunt) {
 	protractor_webdriver: {
 	    options: {},
 	    default: {},
-	  },
+  	},
+
+  	shell: {
+  		options: {},
+  		target: {
+  			command: 'webdriver-manager update --standalone'
+  		}
+  	}
 
   });
 
@@ -432,6 +439,7 @@ module.exports = function (grunt) {
     'autoprefixer',
     'connect:test',
     'karma',
+    'shell',
     'protractor_webdriver',
     'protractor'
   ]);

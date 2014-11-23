@@ -41,6 +41,7 @@
   "dependencies": {
     "grunt-protractor-runner": "^1.1.4",
     "grunt-protractor-webdriver": "^0.1.9",
+    "grunt-shell": "^1.1.1",
     "protractor": "^1.4.0"
   }
 }
