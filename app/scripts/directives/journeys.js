@@ -17,7 +17,7 @@ angular.module('shouldICycleApp')
 				// as we are clicking icons and not links
 				scope.naviateTo = function(path) {
 					$location.path(path);
-				}
+				};
 			}
 		};
 	});

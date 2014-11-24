@@ -26,8 +26,12 @@ angular
 				controller: 'MainCtrl'
 			})
 			.when('/add-journey', {
-				templateUrl: 'views/add-journey.html',
+				templateUrl: 'views/journey.html',
 				controller: 'AddJourneyCtrl'
+			})
+			.when('/edit-journey/:id', {
+				templateUrl: 'views/journey.html',
+				controller: 'EditJourneyCtrl'
 			})
 			.otherwise({
 				redirectTo: '/404.html'

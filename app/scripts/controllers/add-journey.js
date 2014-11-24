@@ -11,5 +11,5 @@ angular.module('shouldICycleApp')
 	.controller('AddJourneyCtrl', function ($scope, userData) {
 		// get the stored data for the user
 		$scope.data = userData.getData();
-
+		$scope.formMode = 'add';
   	});

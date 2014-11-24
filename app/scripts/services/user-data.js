@@ -14,6 +14,7 @@ angular.module('shouldICycleApp')
 		var ref = 'should-i-cycle',
 			userData = JSON.parse(window.localStorage.getItem(ref));
 
+		// register user func, call internal API setters to set the users details and the registered flag
 		this.registerUser = function(name, postCode) {
 			// validate the inputs
 			if(typeof name === 'undefined' || typeof postCode === 'undefined') {
@@ -57,6 +58,7 @@ angular.module('shouldICycleApp')
 			return userData.name;
 		};
 
+		// add journey function takes only two args the time and name and sets them accordingly in the data store
 		this.addJourney = function(time, name) {
 			if (typeof time === 'undefined' || typeof name === 'undefined') {
 				return false;
@@ -68,6 +70,28 @@ angular.module('shouldICycleApp')
 			userData.journeys.push({time:time, name:name});
 			this.save();
 			
+			return true;
+		};
+
+		// edit journey function checks to make  sure we have the right data to work with, can find the journey
+		// then saves it back to the store
+		this.editJourney = function(options) {
+			if (typeof options.name === 'undefined' && typeof options.time === 'undefined') {
+				return false;
+			}
+			if(typeof options.id === 'undefined') {
+				return false;
+			}
+			var journey = this.getJourney(options.id);
+			if(!journey) {
+				return false;
+			}
+			// update the record
+			userData.journeys[options.id] = {
+				time: (options.time) ? options.time : userData.journeys[options.id].time, 
+				name: (options.name) ? options.name : userData.journeys[options.id].name
+			};
+			this.save();
 			return true;
 		};
 

@@ -51,19 +51,12 @@ describe('Controller: AddJourneyCtrl', function() {
 		browser.get(siteUrl+'/#/');
 		browser.waitForAngular();
 		expect(element.all(by.repeater('journey in data.journeys')).count()).toEqual(1);
-
-		var journeyName = element(by.repeater('journey in data.journeys').row(0).column('{{journey.name}}')),
-			journeyTime = element(by.repeater('journey in data.journeys').row(0).column('{{journey.time}}'));
-
-		expect(journeyName.getText()).toBe('Commute');
-		expect(journeyTime.getText()).toBe('23:20');
-
 	});
 
 	it('should allow us to create a second journey', function(){
 		browser.get(siteUrl+'/#/add-journey');
 		element(by.model('journeyName')).sendKeys('Commute 2');
-		element(by.model('journeyTime')).sendKeys('10:20');
+		element(by.model('journeyTime')).sendKeys('10:20'); 
 		element(by.css('.add-journey-button')).click();
 	});
 
