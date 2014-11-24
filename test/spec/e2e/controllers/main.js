@@ -1,14 +1,40 @@
 'use strict';
 
-describe('angularjs homepage todo list', function() {
-  it('should add a todo', function() {
-    browser.get('http://www.angularjs.org');
+describe('Controller: MainCtrl', function() {
 
-    element(by.model('todoText')).sendKeys('write a protractor test');
-    element(by.css('[value="add"]')).click();
+	var siteUrl = 'http://localhost:9000';
 
-    var todoList = element.all(by.repeater('todo in todos'));
-    expect(todoList.count()).toEqual(3);
-    expect(todoList.get(2).getText()).toEqual('write a protractor test');
-  });
+	it('should display the register form if there is no user data', function(){
+		browser.get(siteUrl+'/#/');
+		expect(element(by.css('.register')).isDisplayed()).toBe(true);
+		expect(element(by.css('.add-journey')).isDisplayed()).toBe(false);
+		expect(element(by.css('.journeys')).isDisplayed()).toBe(false);
+	});
+
+	it('should not allow the user to register unless both inputs are filled in', function(){
+		browser.get(siteUrl+'/#/');
+		var nameInput = element(by.model('name')),
+			postCodeInput = element(by.model('postCode'));
+
+		nameInput.sendKeys('Gareth');
+		expect(element(by.css('.register-button')).isEnabled()).toBe(false);
+		nameInput.clear();
+
+		postCodeInput.sendKeys('234 334');
+		expect(element(by.css('.register-button')).isEnabled()).toBe(false);
+		nameInput.sendKeys('Gareth');
+		expect(element(by.css('.register-button')).isEnabled()).toBe(true);
+	});
+
+	it('should allow the user to register correctly', function() {
+		browser.get(siteUrl+'/#/');
+		var nameInput = element(by.model('name'));
+		nameInput.sendKeys('e2e User');
+		var postCodeInput = element(by.model('postCode'));
+		postCodeInput.sendKeys('PE29 2BN');
+		element(by.css('.register-button')).click();
+		// expect to see the add journey button now we have registered
+		expect(element(by.css('.add-journey')).isDisplayed()).toBe(true);
+	});
+
 });

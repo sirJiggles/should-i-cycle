@@ -42,7 +42,7 @@ module.exports = function (grunt) {
       },
       jsTest: {
         files: ['test/spec/**/**/*.js'],
-        tasks: ['newer:jshint:test', 'karma', 'protractor']
+        tasks: ['newer:jshint:test', 'karma', 'protractor_webdriver', 'protractor']
       },
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
