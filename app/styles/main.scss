@@ -49,10 +49,19 @@ h1 {
 	}
 }
 
-// rows for the sign up form
+h3 {
+	text-align: center;
+	color: white;
+}
+
+// rows for the sign up form and buttons
 .input-group {
 	margin-bottom: 20px;
 }
+button.btn {
+	margin-bottom: 10px;
+}
+
 // strange that this is an issue
 .input-group-addon {
 	top: 0;
@@ -66,11 +75,6 @@ h1 {
 // the main namespace
 .main {
 	
-}
-
-// this is the route for the add journey section
-.add-journey {
-
 }
 
 // the journeys accordian
@@ -90,11 +94,13 @@ h1 {
 		.fa-trash,
 		.fa-edit {
 			position: absolute;
-			top: 0;
+			z-index: 2;
+			font-size: 1.7em;
 		}
 
 		.fa-trash {
 			right: 0px;
+			top: -5px;
 
 			&:hover {
 				color: red;
@@ -102,7 +108,8 @@ h1 {
 		}
 
 		.fa-edit {
-			right: 20px;
+			right: 30px;
+			top: -3px;
 
 			&:hover {
 				color: green;

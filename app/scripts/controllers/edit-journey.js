@@ -8,16 +8,8 @@
  * Controller of the shouldICycleApp
  */
 angular.module('shouldICycleApp')
-	.controller('EditJourneyCtrl', function ($scope, userData, $routeParams, $location, growl) {
+	.controller('EditJourneyCtrl', function ($scope, userData) {
 		// get the stored data for the user
 		$scope.data = userData.getData();
-
-		// of we have an id set the mode for the shared directive
-		if ($routeParams.id) {
-			$scope.formMode = 'edit';
-		} else {
-			$location.path('/');
-			growl.warning('An ID is needed to edit a journey.', {title: 'Warning'});
-		}
-
+		$scope.formMode = 'edit';
   	});

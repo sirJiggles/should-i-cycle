@@ -29,6 +29,11 @@ angular.module('shouldICycleApp')
 					}
 				}
 
+				// function to cancel and navigate back home
+				scope.cancel = function() {
+					$location.path('/');
+				};
+
 				// add journey functionality
 				scope.addJourney = function() {
 					// add the journey and redirect home

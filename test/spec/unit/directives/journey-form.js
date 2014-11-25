@@ -9,79 +9,45 @@ describe('Directive: JourneyForm', function () {
     beforeEach(module('views/directives/journey-form.html'));
 
     // Initialize the directive and set up the dependancies
-    beforeEach(inject(function ($rootScope, $compile, _userData_) {
-        this.scope = $rootScope;
+    beforeEach(inject(function ($rootScope, $compile, _userData_, $location, growl) {
+        this.scope = $rootScope.$new();
         this.userData = _userData_;
-        this.element = angular.element('<add-journey-form></add-journey-form>');
+        this.growl = growl;
+        this.location = $location;
+        this.element = angular.element('<journey-form></journey-form>');
         $compile(this.element)($rootScope);
         this.scope.$digest();
+        // stop functions being called
+        spyOn(this.location, 'path').and.returnValue('Fake location');
+        spyOn(this.growl, 'success').and.returnValue(1);
+    	spyOn(this.growl, 'error').and.returnValue(2);
+    	spyOn(this.growl, 'warning').and.returnValue(3);
     }));
 
+
     it('should be able to add a journey to the datastore', function() {
-        this.userData.addJourney('05:40', 'Test name for the journey');
-        var journey = this.userData.getJourney(0);
-        expect(journey.time).toBe('05:40');
-        expect(journey.name).toBe('Test name for the journey');
-    });
+    	this.scope.journeyTime = '23:00';
+    	this.scope.journeyName = 'Test Journey';
 
-    it('should be able to edit a journeys time in the datastore', function() {
-    	var options = {
-    		id: 0,
-    		time: '05:10'
-    	};
-    	this.userData.editJourney(options);
-    	var journey = this.userData.getJourney(0);
-    	expect(journey.time).toBe('05:10');
-    	expect(journey.name).toBe('Test name for the journey');
-    });
+    	spyOn(this.scope, 'addJourney').and.callThrough();
 
-    it('should be able to edit a journeys name in the datastore', function(){
-    	var options = {
-    		id: 0,
-    		name: 'Rename test'
-    	};
-    	this.userData.editJourney(options);
-    	var journey = this.userData.getJourney(0);
-    	expect(journey.time).toBe('05:10');
-    	expect(journey.name).toBe('Rename test');
-    });
+    	this.scope.addJourney();
+    	this.scope.$root.$digest();
 
-    it('should be able to edit both name and time for a journey', function() {
-    	var options = {
-    		id: 0,
-    		time: '05:00',
-    		name: 'Second Rename'
-    	};
-    	this.userData.editJourney(options);
-    	var journey = this.userData.getJourney(0);
-    	expect(journey.time).toBe('05:00');
-    	expect(journey.name).toBe('Second Rename');
+    	expect(this.scope.addJourney).toHaveBeenCalled();
     });
+    
 
-    it('should return false if it cannot find the journey to edit', function() {
-    	var options = {
-    		id: 2,
-    		name: 'something'
-    	};
-    	var journeyEditAction = this.userData.editJourney(options);
-    	expect(journeyEditAction).toBe(false);
-    });
+    it('should be able to edit a journey', function() {
+    	this.scope.journeyTime = '23:00';
+    	this.scope.journeyName = 'Test Journey';
 
-    it('should return false if there is no name or time in the edit options', function() {
-    	var options = {
-    		id: 0
-    	};
-    	var journeyEditAction = this.userData.editJourney(options);
-    	expect(journeyEditAction).toBe(false);
-    });
+    	spyOn(this.scope, 'editJourney').and.callThrough();
+    	
+    	this.scope.editJourney();
+    	this.scope.$root.$digest();
 
-    it('should return false if there is no ID in the options obj', function() {
-    	var options = {
-    		time: '05:10',
-    		name: 'something'
-    	};
-    	var journeyEditAction = this.userData.editJourney(options);
-    	expect(journeyEditAction).toBe(false);
+    	expect(this.scope.editJourney).toHaveBeenCalled();
     });
 
 

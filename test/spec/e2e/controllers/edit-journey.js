@@ -4,12 +4,6 @@ describe('Controller: EditJourneyCtrl', function() {
 
 	var siteUrl = 'http://localhost:9000';
 
-	it('should redirect the user back if there is no ID flag on the edit-journey route', function(){
-		browser.get(siteUrl+'/#/edit-journey');
-		browser.waitForAngular();
-		expect(browser.getLocationAbsUrl()).toBe('/');
-	});
-
 	it('should redirect the user back if there is an incorrect ID on the edit-journey route', function(){
 		browser.get(siteUrl+'/#/edit-journey/22');
 		browser.waitForAngular();
@@ -21,8 +15,8 @@ describe('Controller: EditJourneyCtrl', function() {
 		browser.waitForAngular();
 		var timeInput = element(by.model('journeyTime')),
 			nameInput = element(by.model('journeyName'));
-		expect(nameInput.getText()).toEqual('Commute');
-		expect(timeInput.getText()).toEqual('23:20');
+		expect(nameInput.getAttribute('value')).toEqual('Commute');
+		expect(timeInput.getAttribute('value')).toEqual('23:20:00.000');
 	});
 
 	it('should show the edit button and not the add journey button', function() {
@@ -41,6 +35,7 @@ describe('Controller: EditJourneyCtrl', function() {
 
 	it('should allow the user to edit a journey and be re-directed back home', function(){
 		browser.get(siteUrl+'/#/edit-journey/0');
+		element(by.model('journeyName')).clear();
 		element(by.model('journeyName')).sendKeys('Journey One Rename');
 		element(by.model('journeyTime')).sendKeys('10:10');
 		element(by.css('.edit-journey-button')).click();
@@ -50,5 +45,11 @@ describe('Controller: EditJourneyCtrl', function() {
 
 	it('should reflect our new chnages in the list of journeys on the screen', function() {
 		// @TODO need to get the repeat select working for this bad boi
+	});
+
+	it('should redirect back home if the user cancels', function(){
+		browser.get(siteUrl+'/#/add-journey');
+		element(by.css('.cancel-button')).click();
+		expect(browser.getLocationAbsUrl()).toEqual('/');
 	});
 });

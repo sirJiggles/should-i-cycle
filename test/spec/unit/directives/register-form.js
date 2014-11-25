@@ -17,8 +17,17 @@ describe('Directive: RegisterForm', function () {
         this.scope.$digest();
     }));
 
-    it('should be able to register a user', function() {
-        var data = this.userData.registerUser('Gareth Fuller', 'PE29 2BN');
+    it('should be able to reg a user using the scope.register function', function() {
+    	this.scope.name = 'Gareth Fuller';
+    	this.scope.postCode = 'PE29 2BN';
+
+    	spyOn(this.scope, 'registerUser').and.callThrough();
+    	this.scope.registerUser();
+    	this.scope.$root.$digest();
+    	expect(this.scope.registerUser).toHaveBeenCalled();
+
+    	// check on the data we got back from running the function
+        var data = this.scope.data;
         expect(data.registered).toBeDefined();
         expect(data.registered).toBeTruthy();
         expect(data.postCode).toBeDefined();

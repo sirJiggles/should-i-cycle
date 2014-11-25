@@ -51,6 +51,8 @@ describe('Controller: AddJourneyCtrl', function() {
 		browser.get(siteUrl+'/#/');
 		browser.waitForAngular();
 		expect(element.all(by.repeater('journey in data.journeys')).count()).toEqual(1);
+		//var itemOneName = element(by.repeater('journey in data.journeys').row(0).column('{{journey.name}}'));
+		//expect(itemOneName.getText()).toBe('Commute');
 	});
 
 	it('should allow us to create a second journey', function(){
@@ -64,6 +66,12 @@ describe('Controller: AddJourneyCtrl', function() {
 		browser.get(siteUrl+'/#/');
 		browser.waitForAngular();
 		expect(element.all(by.repeater('journey in data.journeys')).count()).toEqual(2);
+	});
+
+	it('should redirect back home if the user cancels', function(){
+		browser.get(siteUrl+'/#/add-journey');
+		element(by.css('.cancel-button')).click();
+		expect(browser.getLocationAbsUrl()).toEqual('/');
 	});
 
 

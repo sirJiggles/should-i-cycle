@@ -17,7 +17,7 @@ describe('Service: userData', function () {
         expect(data).toBeNull();
     });
 
-
+    // REGISTERING SECTION
     it('should be able to register a user', function() {
         var data = this.userData.registerUser('Gareth Fuller', 'PE29 2BN');
         expect(data).toBeDefined();
@@ -44,6 +44,8 @@ describe('Service: userData', function () {
         expect(regFlag).toBe(true);
     });
 
+    // ADDING JOURNEYS
+
     it('should be able to save a journey time to the datastore', function(){
         this.userData.addJourney('07:00', 'Journey One');
         var journey = this.userData.getJourney(0);
@@ -67,6 +69,93 @@ describe('Service: userData', function () {
         expect(journeys[0].name).toEqual('Journey New One');
         expect(journeys[1].time).toEqual('05:20');
         expect(journeys[1].name).toEqual('Journey New Two');
+    });
+
+    // EDITING JOURNEYS
+
+    it('should be able to edit a journeys time in the datastore', function() {
+    	this.userData.addJourney('05:00', 'Test name for the journey');
+    	var options = {
+    		id: 0,
+    		time: '05:10'
+    	};
+    	this.userData.editJourney(options);
+    	var journey = this.userData.getJourney(0);
+    	expect(journey.time).toBe('05:10');
+    	expect(journey.name).toBe('Test name for the journey');
+    });
+
+    it('should be able to edit a journeys name in the datastore', function(){
+    	this.userData.addJourney('05:10', 'Test name for the journey');
+    	var options = {
+    		id: 0,
+    		name: 'Rename test'
+    	};
+    	this.userData.editJourney(options);
+    	var journey = this.userData.getJourney(0);
+    	expect(journey.time).toBe('05:10');
+    	expect(journey.name).toBe('Rename test');
+    });
+
+    it('should be able to edit both name and time for a journey', function() {
+    	this.userData.addJourney('05:20', 'Test name for the journey');
+    	var options = {
+    		id: 0,
+    		time: '05:00',
+    		name: 'Second Rename'
+    	};
+    	this.userData.editJourney(options);
+    	var journey = this.userData.getJourney(0);
+    	expect(journey.time).toBe('05:00');
+    	expect(journey.name).toBe('Second Rename');
+    });
+
+    it('should return false if it cannot find the journey to edit', function() {
+    	this.userData.addJourney('05:00', 'Test name for the journey');
+    	var options = {
+    		id: 1,
+    		name: 'something'
+    	};
+    	var journeyEditAction = this.userData.editJourney(options);
+    	expect(journeyEditAction).toBe(false);
+    });
+
+    it('should return false if there is no name or time in the edit options', function() {
+    	this.userData.addJourney('05:00', 'Test name for the journey');
+    	var options = {
+    		id: 0
+    	};
+    	var journeyEditAction = this.userData.editJourney(options);
+    	expect(journeyEditAction).toBe(false);
+    });
+
+    it('should return false if there is no ID in the options obj', function() {
+    	this.userData.addJourney('05:00', 'Test name for the journey');
+    	var options = {
+    		time: '05:10',
+    		name: 'something'
+    	};
+    	var journeyEditAction = this.userData.editJourney(options);
+    	expect(journeyEditAction).toBe(false);
+    });
+
+    // DELETING JOURNEYS
+    it('should be able to remove a journey from the data store', function() {
+    	this.userData.addJourney('05:00', 'Test name for the journey');
+    	var removeAction = this.userData.removeJourney(0);
+    	expect(removeAction).toBe(true);
+    });
+
+    it('should return false if no ID is passed to the remove journey function', function() {
+    	this.userData.addJourney('05:00', 'Test name for the journey');
+    	var removeAction = this.userData.removeJourney();
+    	expect(removeAction).toBe(false);
+    });
+
+    it('should return false if the user tries to delete a journey that does not exist', function() {
+    	this.userData.addJourney('05:00', 'Test name for the journey');
+    	var removeAction = this.userData.removeJourney(100);
+    	expect(removeAction).toBe(false);
     });
 
 });

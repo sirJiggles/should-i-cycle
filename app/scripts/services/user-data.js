@@ -95,6 +95,23 @@ angular.module('shouldICycleApp')
 			return true;
 		};
 
+		// remove the journeys
+		this.removeJourney = function(index) {
+			// check for args
+			if (typeof index === 'undefined') {
+				return false;
+			}
+			// check for item
+			var journey = userData.journeys[index];
+			if(!journey) {
+				return false;
+			}
+			// remove item
+			userData.journeys.splice(index, 1);
+			this.save();
+			return true;
+		};
+
 		this.getJourney = function(index) {
 			return (userData.journeys[index]) ? userData.journeys[index] : false;
 		};

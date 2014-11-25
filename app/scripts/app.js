@@ -33,6 +33,10 @@ angular
 				templateUrl: 'views/journey.html',
 				controller: 'EditJourneyCtrl'
 			})
+			.when('/remove-journey/:id', {
+				templateUrl: 'views/remove-confirm.html',
+				controller: 'RemoveJourneyCtrl'
+			})
 			.otherwise({
 				redirectTo: '/404.html'
 			});
