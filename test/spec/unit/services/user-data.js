@@ -17,6 +17,29 @@ describe('Service: userData', function () {
         expect(data).toBeNull();
     });
 
+    // UPDATING DETAILS
+    it('should be able to update a users settings', function() {
+    	// fake a reg user
+    	this.userData.registerUser('Gareth Fuller', 'PE29 2BN');
+    	var updateOperation = this.userData.updateSettings('New Name', 'New Post');
+    	expect(updateOperation).toBe(true);
+    	expect(this.userData.getName()).toEqual('New Name');
+    	expect(this.userData.getPostCode()).toEqual('New Post');
+    });
+
+    it('should return false if the update settings func is not passed two strings', function() {
+    	// fake a reg user
+		this.userData.registerUser('Gareth Fuller', 'PE29 2BN');
+		var updateOperation = false;
+
+		updateOperation = this.userData.updateSettings('Name only');
+		expect(updateOperation).toBe(false);
+		updateOperation = this.userData.updateSettings();
+		expect(updateOperation).toBe(false);
+		expect(this.userData.getName()).toEqual('Gareth Fuller');
+    	expect(this.userData.getPostCode()).toEqual('PE29 2BN');
+    });
+
     // REGISTERING SECTION
     it('should be able to register a user', function() {
         var data = this.userData.registerUser('Gareth Fuller', 'PE29 2BN');

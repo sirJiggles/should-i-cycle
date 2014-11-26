@@ -8,46 +8,56 @@ describe('Directive: JourneyForm', function () {
     // load the directive template
     beforeEach(module('views/directives/journey-form.html'));
 
+
+    var $location,
+    	scope,
+    	growl,
+    	element,
+    	userData;
+
     // Initialize the directive and set up the dependancies
-    beforeEach(inject(function ($rootScope, $compile, _userData_, $location, growl) {
-        this.scope = $rootScope.$new();
-        this.userData = _userData_;
-        this.growl = growl;
-        this.location = $location;
-        this.element = angular.element('<journey-form></journey-form>');
-        $compile(this.element)($rootScope);
-        this.scope.$digest();
-        // stop functions being called
-        spyOn(this.location, 'path').and.returnValue('Fake location');
-        spyOn(this.growl, 'success').and.returnValue(1);
-    	spyOn(this.growl, 'error').and.returnValue(2);
-    	spyOn(this.growl, 'warning').and.returnValue(3);
+    beforeEach(inject(function ($rootScope, $compile, _userData_, _$location_, _growl_) {
+        scope = $rootScope.$new();
+        userData = _userData_;
+        growl = _growl_;
+        $location = _$location_;
+
+        // stop functions being called / settup spys
+        element = angular.element('<journey-form></journey-form>');
+        $compile(element)($rootScope);
+        scope.$digest();
+        
+		spyOn($location, 'path');
+        spyOn(growl, 'success').and.returnValue(1);
+    	spyOn(growl, 'error').and.returnValue(2);
+    	spyOn(growl, 'warning').and.returnValue(3);
     }));
 
-
     it('should be able to add a journey to the datastore', function() {
-    	this.scope.journeyTime = '23:00';
-    	this.scope.journeyName = 'Test Journey';
+    	scope.journeyTime = '23:00';
+    	scope.journeyName = 'Test Journey';
 
-    	spyOn(this.scope, 'addJourney').and.callThrough();
+    	spyOn(scope, 'addJourney').and.callThrough();
 
-    	this.scope.addJourney();
-    	this.scope.$root.$digest();
+    	scope.addJourney();
 
-    	expect(this.scope.addJourney).toHaveBeenCalled();
+    	expect(scope.addJourney).toHaveBeenCalled();
+    	//expect($location.path).toHaveBeenCalledWith('/');
+    	//expect(growl.success).toHaveBeenCalledWith('Journey added', {title: 'Success'});
     });
     
 
     it('should be able to edit a journey', function() {
-    	this.scope.journeyTime = '23:00';
-    	this.scope.journeyName = 'Test Journey';
+    	scope.journeyTime = '23:00';
+    	scope.journeyName = 'Test Journey';
 
-    	spyOn(this.scope, 'editJourney').and.callThrough();
+    	spyOn(scope, 'editJourney').and.callThrough();
     	
-    	this.scope.editJourney();
-    	this.scope.$root.$digest();
+    	scope.editJourney();
 
-    	expect(this.scope.editJourney).toHaveBeenCalled();
+    	expect(scope.editJourney).toHaveBeenCalled();
+    	//expect($location.path).toHaveBeenCalledWith('/');
+    	//expect(growl.success).toHaveBeenCalledWith('Journey updated', {title: 'Success'});
     });
 
 

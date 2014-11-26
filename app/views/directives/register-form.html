@@ -10,8 +10,14 @@
             <input type="text" name="postcode" class="form-control" ng-model="postCode" placeholder="Post Code" required />
         </div>
    
-        <button type="button" class="btn btn-success register-button" ng-disabled="registerForm.$invalid" ng-click="registerUser()" >
+        <button type="button" ng-show="register" class="btn btn-success register-button" ng-disabled="registerForm.$invalid" ng-click="registerUser()">
             <span class="fa fa-bicycle" aria-hidden="true"></span> Start
         </button>
+
+        <button type="button" ng-show="settings" class="btn btn-success update-button" ng-disabled="registerForm.$invalid" ng-click="updateSettings()">
+            Update Settings <span class="fa fa-check-circle" aria-hidden="true"></span>
+        </button>
+
+
     </form>
 </section>

@@ -54,6 +54,27 @@ h3 {
 	color: white;
 }
 
+.settings-btn {
+	position: absolute;
+	top: 29px;
+	right: 19px;
+	color: white;
+	font-size: 1.7em;
+	text-decoration: none;
+	@include opacity(0.6);
+	@include transition(opacity 0.2s linear);
+
+	&:hover,
+	&:focus {
+		color: white;
+		text-decoration: none;
+	}
+
+	&:hover {
+		@include opacity(1);
+	}
+}
+
 // rows for the sign up form and buttons
 .input-group {
 	margin-bottom: 20px;

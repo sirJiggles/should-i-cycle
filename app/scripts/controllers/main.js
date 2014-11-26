@@ -13,6 +13,9 @@ angular.module('shouldICycleApp')
 	  	// get the local storage data
 	  	$scope.data = userData.getData();
 
+	  	// so we know what button to show on the reg form
+	  	$scope.register = true;
+
 	    // the get weather function
 	  	$scope.getWeather = function(postcode) {
 	  		// set the weather data using the world weather online service

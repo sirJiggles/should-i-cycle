@@ -4,7 +4,8 @@ exports.config = {
 	specs: ['spec/e2e/controllers/main.js', 
 			'spec/e2e/controllers/add-journey.js',
 			'spec/e2e/controllers/edit-journey.js',
-			'spec/e2e/controllers/remove-journey.js'],
+			'spec/e2e/controllers/remove-journey.js',
+			'spec/e2e/controllers/settings.js'],
 	capabilities: {
 	    browserName: 'chrome',
 	    shardTestFiles: false

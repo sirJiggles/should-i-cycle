@@ -37,6 +37,10 @@ angular
 				templateUrl: 'views/remove-confirm.html',
 				controller: 'RemoveJourneyCtrl'
 			})
+			.when('/settings', {
+				templateUrl: 'views/settings.html',
+				controller: 'SettingsCtrl'
+			})
 			.otherwise({
 				redirectTo: '/404.html'
 			});

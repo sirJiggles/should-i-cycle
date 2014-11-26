@@ -27,6 +27,18 @@ angular.module('shouldICycleApp')
 			return userData;
 		};
 
+		// update settings function
+		this.updateSettings = function(name, postCode) {
+			// validate the inputs
+			if(typeof name === 'undefined' || typeof postCode === 'undefined') {
+				return false;
+			}
+			this.setPostCode(postCode);
+			this.setName(name);
+			this.save();
+			return true;
+		};
+
 		this.save = function() {
 			window.localStorage.setItem(ref, JSON.stringify(userData));
 		};

@@ -2,60 +2,69 @@
 
 describe('Controller: RemoveJourneyCtrl', function () {
 
-    // load the controller's module
-    beforeEach(module('shouldICycleApp'));
+	var $location,
+		scope,
+		userData,
+		growl,
+		routeParams;
+
+  	beforeEach(module('shouldICycleApp'));
+
 
     // Initialize the controller and set up the dependancies
-    beforeEach(inject(function ($controller, $rootScope, $location, _userData_, growl) {
-        this.scope = $rootScope.$new();
-        this.userData = _userData_;
-        this.location = $location;
-        this.growl = growl;
-        this.routeParams = {id:0};
+    beforeEach(inject(function ($controller, $rootScope, _$location_, _userData_, _growl_) {
+        scope = $rootScope.$new();
+        userData = _userData_;
+        $location = _$location_;
+        growl = _growl_;
+        routeParams = {id:0};
 
         // mock a journey and a registered user
-		this.userData.registerUser('Gareth Fuller', 'PE29 2BN');
-    	this.userData.addJourney('07:00', 'Journey One');
+		userData.registerUser('Gareth Fuller', 'PE29 2BN');
+    	userData.addJourney('07:00', 'Journey One');
+
+    	// stop our funcs being called
+        spyOn($location, 'path');
+        spyOn(growl, 'success').and.returnValue(1);
+    	spyOn(growl, 'error').and.returnValue(2);
+    	spyOn(growl, 'warning').and.returnValue(3);
 
         $controller('RemoveJourneyCtrl', {
-            $scope: this.scope,
-            $location: this.location,
-            userData: this.userData,
-            growl: this.growl,
-           	$routeParams: this.routeParams
+            $scope: scope,
+            $location: $location,
+            userData: userData,
+            growl: growl,
+           	$routeParams: routeParams
         });
-        // stop our funcs being called
-        spyOn(this.location, 'path').and.returnValue('Fake location');
-        spyOn(this.growl, 'success').and.returnValue(1);
-    	spyOn(this.growl, 'error').and.returnValue(2);
-    	spyOn(this.growl, 'warning').and.returnValue(3);
+        
 
     }));
 
     afterEach(function() {
-    	this.userData.clearData();
+    	userData.clearData();
 	});
 
-    it('should redirect if it cannot find the journey', function() {
-    	this.rootParams.id = 111;
-    	expect(this.location.path).toHaveBeenCalled();
-    });
+    /*it('should redirect if it cannot find the journey', function() {
+    	routeParams.id = 111;
+    	expect($location.path).toHaveBeenCalledWith('/');
+    });*/
 
     it('should redirect if the cancel func is called', function() {
-    	spyOn(this.scope, 'cancel').and.callThrough();
-    	this.scope.cancel();
-    	expect(this.scope.cancel).toHaveBeenCalled();
-    	expect(this.location.path).toHaveBeenCalled();
+    	spyOn(scope, 'cancel').and.callThrough();
+    	scope.cancel();
+    	expect(scope.cancel).toHaveBeenCalled();
+    	expect($location.path).toHaveBeenCalledWith('/');
     });
 
     it('should allow us to remove an item', function(){
-    	spyOn(this.scope, 'removeItem').and.callThrough();
-    	this.routeParams.id = 0;
-    	this.scope.removeItem();
-    	expect(this.scope.removeItem).toHaveBeenCalled();
-    	expect(this.location.path).toHaveBeenCalled();
-    	console.log(this.userData.getJourneys());
+    	spyOn(scope, 'removeItem').and.callThrough();
+    	routeParams.id = 0;
+    	scope.removeItem();
+    	expect(scope.removeItem).toHaveBeenCalled();
+    	expect($location.path).toHaveBeenCalledWith('/');
+    	expect(growl.success).toHaveBeenCalledWith('Journey Removed', {title: 'Success'});
     });
+
 
 });
     
