@@ -15,7 +15,7 @@ describe('Controller: DeleteJourneyCtrl', function() {
 		expect(element(by.css('.cancel-button')).isDisplayed()).toBe(true);
 		expect(element(by.css('.confirm-button')).isDisplayed()).toBe(true);
 		var journeyName = element(by.binding('item'));
-		expect(journeyName.getText()).toEqual('Are you sure you wish to remove Journey One Rename');
+		expect(journeyName.getText()).toEqual('Are you sure you wish to remove Journey One Rename?');
 	});
 
 	it('should redirect back home if the user cancels', function(){
