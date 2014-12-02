@@ -18,7 +18,10 @@ angular.module('shouldICycleApp')
 		this.registerUser = function(name, postCode) {
 			// validate the inputs
 			if(typeof name === 'undefined' || typeof postCode === 'undefined') {
-				return null;
+				return false;
+			}
+			if(name === '' || postCode === ''){
+				return false;
 			}
 			this.setRegistered();
 			this.setPostCode(postCode);
@@ -33,6 +36,10 @@ angular.module('shouldICycleApp')
 			if(typeof name === 'undefined' || typeof postCode === 'undefined') {
 				return false;
 			}
+			if(name === '' || postCode === '') {
+				return false;
+			}
+
 			this.setPostCode(postCode);
 			this.setName(name);
 			this.save();
@@ -75,6 +82,10 @@ angular.module('shouldICycleApp')
 			if (typeof time === 'undefined' || typeof name === 'undefined') {
 				return false;
 			}
+
+			if (time === '' || name === '') {
+				return false;
+			}
 			// define if not defined
 			userData = userData || {};
 			userData.journeys = userData.journeys || [];
@@ -88,7 +99,10 @@ angular.module('shouldICycleApp')
 		// edit journey function checks to make  sure we have the right data to work with, can find the journey
 		// then saves it back to the store
 		this.editJourney = function(options) {
-			if (typeof options.name === 'undefined' && typeof options.time === 'undefined') {
+			if (typeof options.name === 'undefined' || typeof options.time === 'undefined') {
+				return false;
+			}
+			if (options.time === '' || options.name === '') {
 				return false;
 			}
 			if(typeof options.id === 'undefined') {

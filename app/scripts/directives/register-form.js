@@ -16,6 +16,10 @@ angular.module('shouldICycleApp')
 			link: function(scope) {
 				scope.registerUser = function() {
 			    	scope.data = userData.registerUser(scope.name, scope.postCode);
+
+			    	if(!scope.data) {
+			    		growl.error('Unable to register, please try again.', {title:'Error'});
+			    	}
 	    		};
 	    		scope.updateSettings = function() {
 	    			var updateOperation = userData.updateSettings(scope.name, scope.postCode);

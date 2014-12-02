@@ -39,6 +39,7 @@ describe('Controller: SettingsCtrl', function() {
 		element(by.css('.update-button')).click();
 		// expect to be re-directed out
 		expect(browser.getLocationAbsUrl()).toBe('/');
+		
 	});
 
 });

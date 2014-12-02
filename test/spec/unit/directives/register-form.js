@@ -11,21 +11,45 @@ describe('Directive: RegisterForm', function () {
     var userData,
     	growl,
     	scope,
+    	$location,
     	element;
 
     // Initialize the directive and set up the dependancies
-    beforeEach(inject(function ($rootScope, $compile, _userData_, _growl_) {
-        scope = $rootScope;
+    beforeEach(inject(function ($rootScope, $compile, _userData_, _growl_, _$location_) {
+        scope = $rootScope.$new();
         userData = _userData_;
         growl = _growl_;
+        $location = _$location_;
+
         element = angular.element('<register-form></register-form>');
-        $compile(element)($rootScope);
+        $compile(element)(scope);
         scope.$digest();
 
+        spyOn($location, 'path');
         spyOn(growl, 'success').and.returnValue(1);
     	spyOn(growl, 'error').and.returnValue(2);
     	spyOn(growl, 'warning').and.returnValue(3);
     }));
+
+    it('should error if trying to reg a user without a name', function() {
+    	scope.register = true;
+    	scope.name = '';
+    	scope.postCode = 'Something';
+    	spyOn(scope, 'registerUser').and.callThrough();
+    	scope.registerUser();
+    	expect(scope.registerUser).toHaveBeenCalled();
+    	expect(growl.error).toHaveBeenCalledWith('Unable to register, please try again.', {title:'Error'});
+    });
+
+    it('should error if trying to reg a user without a post code', function() {
+    	scope.register = true;
+    	scope.name = 'Someting';
+    	scope.postCode = '';
+    	spyOn(scope, 'registerUser').and.callThrough();
+    	scope.registerUser();
+    	expect(scope.registerUser).toHaveBeenCalled();
+    	expect(growl.error).toHaveBeenCalledWith('Unable to register, please try again.', {title:'Error'});
+    });
 
     it('should be able to reg a user using the scope.register function', function() {
 
@@ -35,7 +59,9 @@ describe('Directive: RegisterForm', function () {
 
     	spyOn(scope, 'registerUser').and.callThrough();
     	scope.registerUser();
-    	scope.$root.$digest();
+
+    	//scope.$root.$digest();
+
     	expect(scope.registerUser).toHaveBeenCalled();
 
     	// check on the data we got back from running the function
@@ -46,6 +72,38 @@ describe('Directive: RegisterForm', function () {
         expect(data.postCode).toEqual('PE29 2BN');
         expect(data.name).toBeDefined();
         expect(data.name).toEqual('Gareth Fuller');
+    });
+
+    it('should throw an error if the user tries to register without a name', function(){
+    	scope.settings = true;
+
+    	// set up some existing details
+    	userData.registerUser('TestUser', 'OldPost');
+    	// spy on our function
+    	spyOn(scope, 'updateSettings').and.callThrough();
+    	scope.postCode = userData.getPostCode();
+    	scope.name = '';
+
+    	scope.updateSettings();
+
+    	expect(growl.error).toHaveBeenCalledWith('Unable to update settings, please try again.', {title:'Error'});
+    	expect($location.path).toHaveBeenCalledWith('/');
+    });
+
+    it('should throw an error if the user tries to register without a postCode', function(){
+    	scope.settings = true;
+
+    	// set up some existing details
+    	userData.registerUser('TestUser', 'OldPost');
+    	// spy on our function
+    	spyOn(scope, 'updateSettings').and.callThrough();
+    	scope.postCode = '';
+    	scope.name = userData.getName();
+
+    	scope.updateSettings();
+
+    	expect(growl.error).toHaveBeenCalledWith('Unable to update settings, please try again.', {title:'Error'});
+    	expect($location.path).toHaveBeenCalledWith('/');
     });
 
     it('should be able to change the settings for the user', function() {
@@ -71,11 +129,10 @@ describe('Directive: RegisterForm', function () {
 
     	// Assert
     	expect(scope.updateSettings).toHaveBeenCalled();
-    	expect(growl.success).toHaveBeenCalled();
-
+    	expect(growl.success).toHaveBeenCalledWith('Settings updated', {title:'Success'});
 		expect(userData.getName()).toEqual('Gareth');
     	expect(userData.getPostCode()).toEqual('NewPost');
-
+    	expect($location.path).toHaveBeenCalledWith('/');
     });
 
 

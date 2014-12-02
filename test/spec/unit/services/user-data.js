@@ -100,7 +100,8 @@ describe('Service: userData', function () {
     	this.userData.addJourney('05:00', 'Test name for the journey');
     	var options = {
     		id: 0,
-    		time: '05:10'
+    		time: '05:10',
+    		name: 'Test name for the journey'
     	};
     	this.userData.editJourney(options);
     	var journey = this.userData.getJourney(0);
@@ -112,7 +113,8 @@ describe('Service: userData', function () {
     	this.userData.addJourney('05:10', 'Test name for the journey');
     	var options = {
     		id: 0,
-    		name: 'Rename test'
+    		name: 'Rename test',
+    		time: '05:10'
     	};
     	this.userData.editJourney(options);
     	var journey = this.userData.getJourney(0);
@@ -137,7 +139,8 @@ describe('Service: userData', function () {
     	this.userData.addJourney('05:00', 'Test name for the journey');
     	var options = {
     		id: 1,
-    		name: 'something'
+    		name: 'something',
+    		time: 'somethingElse'
     	};
     	var journeyEditAction = this.userData.editJourney(options);
     	expect(journeyEditAction).toBe(false);
