@@ -60,8 +60,6 @@ describe('Directive: RegisterForm', function () {
     	spyOn(scope, 'registerUser').and.callThrough();
     	scope.registerUser();
 
-    	//scope.$root.$digest();
-
     	expect(scope.registerUser).toHaveBeenCalled();
 
     	// check on the data we got back from running the function
@@ -132,6 +130,21 @@ describe('Directive: RegisterForm', function () {
     	expect(growl.success).toHaveBeenCalledWith('Settings updated', {title:'Success'});
 		expect(userData.getName()).toEqual('Gareth');
     	expect(userData.getPostCode()).toEqual('NewPost');
+    	expect($location.path).toHaveBeenCalledWith('/');
+    });
+
+    it('should allow the user to cancel editing the settings', function(){
+    	scope.settings = true;
+    	// set up some existing details
+    	userData.registerUser('TestUser', 'OldPost');
+    	scope.name = userData.getName();
+    	scope.postCode = userData.getPostCode();
+    	// spy on our function
+    	spyOn(scope, 'cancel').and.callThrough();
+
+    	scope.cancel();
+
+    	expect(scope.cancel).toHaveBeenCalled();
     	expect($location.path).toHaveBeenCalledWith('/');
     });
 

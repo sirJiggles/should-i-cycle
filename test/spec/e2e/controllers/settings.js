@@ -42,4 +42,15 @@ describe('Controller: SettingsCtrl', function() {
 		
 	});
 
+	it('should show the cancel button on the settings form', function(){
+		browser.get(siteUrl+'/#/settings');
+		expect(element(by.css('.cancel-button')).isDisplayed()).toBe(true);
+	});
+
+	it('should allow the user to cancel updating the settings', function(){
+		browser.get(siteUrl+'/#/settings');
+		element(by.css('.cancel-button')).click();
+		expect(browser.getLocationAbsUrl()).toBe('/');
+	});
+
 });

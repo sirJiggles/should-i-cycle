@@ -9,6 +9,7 @@ describe('Controller: MainCtrl', function() {
 		expect(element(by.css('.register')).isDisplayed()).toBe(true);
 		expect(element(by.css('.add-journey')).isDisplayed()).toBe(false);
 		expect(element(by.css('.journeys')).isDisplayed()).toBe(false);
+		expect(element(by.css('.cancel-button')).isDisplayed()).toBe(false);
 	});
 
 	it('should not allow the user to register unless both inputs are filled in', function(){

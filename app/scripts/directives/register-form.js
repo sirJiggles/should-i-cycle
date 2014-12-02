@@ -30,6 +30,10 @@ angular.module('shouldICycleApp')
 	    			}
 	    			$location.path('/');
 	    		};
+
+	    		scope.cancel = function(){
+	    			$location.path('/');
+	    		};
 			}
 		};
 	});
