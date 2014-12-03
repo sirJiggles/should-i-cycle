@@ -56,7 +56,7 @@ angular.module('shouldICycleApp')
 		};
 
 		this.getRegistered =  function() {
-			return userData.registered;
+			return (userData.registered) ? userData.registered : false;
 		};
 
 		this.setPostCode = function(postCode) {
@@ -65,7 +65,7 @@ angular.module('shouldICycleApp')
 		};
 
 		this.getPostCode = function() {
-			return userData.postCode;
+			return (userData.postCode) ? userData.postCode : false;
 		};
 
 		this.setName = function(name) {
@@ -74,7 +74,7 @@ angular.module('shouldICycleApp')
 		};
 
 		this.getName = function() {
-			return userData.name;
+			return (userData.name) ? userData.name : false;
 		};
 
 		// add journey function takes only two args the time and name and sets them accordingly in the data store
@@ -153,6 +153,37 @@ angular.module('shouldICycleApp')
 		this.clearData = function() {
 			window.localStorage.setItem(ref, null);
 			userData = null;
+		};
+
+		this.saveWeather = function(weatherData) {
+			// sanity check the data to make sure we have the min we expect to get
+			if(typeof weatherData === 'undefined' || weatherData === '') {
+				return false;
+			}
+			if( typeof weatherData.data === 'undefined' ||
+				typeof weatherData.data.weather === 'undefined' ||
+				typeof weatherData.data.weather[0].mintempC === 'undefined' ||
+				typeof weatherData.data.weather[0].maxtempC === 'undefined' ||
+				typeof weatherData.data.weather[0].hourly === 'undefined') {
+				return false;
+			}
+			userData = userData || {};
+			userData.weather = weatherData.data.weather[0];
+			this.setLastWeatherTime(new Date().getTime());
+			this.save();
+			return true;
+		};
+
+		this.getWeather = function() {
+			return (userData.weather) ? userData.weather : false;
+		};
+
+		this.setLastWeatherTime = function(time) {
+			userData.lastWeatherTime = time;
+		};
+
+		this.getLastWeatherTime = function() {
+			return (userData.lastWeatherTime) ? userData.lastWeatherTime : false;
 		};
 
 

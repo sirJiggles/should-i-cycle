@@ -2,6 +2,48 @@
 
 describe('Service: userData', function () {
 
+	// used to fake what comes from the wetaher API so we can test against it (these values are the only ones we care about)
+	var dummyWeatherObj = {
+		data: {
+			weather:[{
+				maxtempC: '10',
+				mintempC: '3',
+				hourly: [
+					{
+						time: '0',
+						tempC: '3',
+						weatherDesc: [
+							{
+								value: 'some weather description'
+							}
+						],
+						windspeedMiles: '3'
+					},
+					{
+						time: '300',
+						tempC: '4',
+						weatherDesc: [
+							{
+								value: 'another weather description'
+							}
+						],
+						windspeedMiles: '5'
+					},
+					{
+						time: '600',
+						tempC: '5',
+						weatherDesc: [
+							{
+								value: 'and again weather description'
+							}
+						],
+						windspeedMiles: '6'
+					}
+				]
+			}]
+		}
+	};
+
     // load the controller's module
     beforeEach(module('shouldICycleApp'));
 
@@ -183,6 +225,58 @@ describe('Service: userData', function () {
     	var removeAction = this.userData.removeJourney(100);
     	expect(removeAction).toBe(false);
     });
+
+    // INTERACTING WITH WEATHER DATA
+    it('should throw an error if you do not pass an object to save the weather', function(){
+    	var weatherOperation = this.userData.saveWeather();
+    	expect(weatherOperation).toBe(false);
+    });
+
+    it('should error if you do not pass a correctly formatted object', function() {
+    	var weatherObj = {};
+    	var weatherOperation = this.userData.saveWeather(weatherObj);
+    	expect(weatherOperation).toBe(false);
+
+    	weatherObj.data = {};
+    	weatherObj.data.weather = [{}];
+    	weatherOperation = this.userData.saveWeather(weatherObj);
+    	expect(weatherOperation).toBe(false);
+
+
+    	weatherObj.data.weather[0].hourly = [];
+    	weatherOperation = this.userData.saveWeather(weatherObj);
+    	expect(weatherOperation).toBe(false);
+
+    	weatherObj.data.weather[0].mintempC = '23';
+    	weatherOperation = this.userData.saveWeather(weatherObj);
+    	expect(weatherOperation).toBe(false);
+
+    	weatherObj.data.weather[0].maxtempC = '34';
+    	weatherOperation = this.userData.saveWeather(weatherObj);
+    	expect(weatherOperation).toBe(true);
+    });
+
+    it('should be able to store todays weather', function(){
+    	var weatherOperation = this.userData.saveWeather(dummyWeatherObj),
+    		weatherData = this.userData.getWeather();
+
+    	expect(weatherOperation).toBe(true);
+    	expect(weatherData).toBeDefined();
+    	expect(weatherData.maxtempC).toBeDefined();
+    	expect(weatherData.mintempC).toBeDefined();
+    	expect(weatherData.hourly).toBeDefined();
+    	expect(weatherData.hourly[0]).toBeDefined();
+    	expect(weatherData.hourly[2]).toBeDefined();
+    });
+
+    // time stamp that saves when we last checked the weather
+    it('should save a time when it saves the weather', function(){
+    	this.userData.saveWeather(dummyWeatherObj);
+    	var timeLastSaved = this.userData.getLastWeatherTime();
+    	expect(timeLastSaved).toBeDefined();
+    });
+
+    
 
 });
     

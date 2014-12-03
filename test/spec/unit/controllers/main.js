@@ -5,57 +5,90 @@ describe('Controller: MainCtrl', function () {
     // load the controller's module
     beforeEach(module('shouldICycleApp'));
 
+    var userData,
+    	worldWeatherOnline,
+    	scope,
+    	growl,
+    	$location,
+    	dummyWeatherData = {
+    		data:{
+    			weather:[{
+					maxTempC: '10',
+					minTempC: '3',
+					hourly: [1,2,3,4,5]
+    			}]
+			}
+		};
+
+
     // Initialize the controller and set up the dependancies
-    beforeEach(inject(function ($controller, $rootScope, $httpBackend, _worldWeatherOnline_, _userData_) {
-        this.scope = $rootScope.$new();
-        this.$httpBackend = $httpBackend;
-        this.worldWeatherOnline = _worldWeatherOnline_;
-        this.userData = _userData_;
-        this.dummyWeatherData = {data:{weather:['day1','day2','day3','day4','day5']}};
+    beforeEach(inject(function ($controller, $rootScope, _worldWeatherOnline_, _userData_, _$location_, _growl_) {
+        scope = $rootScope.$new();
+        worldWeatherOnline = _worldWeatherOnline_;
+        userData = _userData_;
+        $location = _$location_;
+        growl = _growl_;
+
+        userData.registerUser('Gareth', 'PE29');
+	
         $controller('MainCtrl', {
-            $scope: this.scope,
+            $scope: scope,
             userData: _userData_,
             worldWeatherOnline: _worldWeatherOnline_
         });
+
     }));
 
+    afterEach(function(){
+    	userData.clearData();
+    });
 
-    it('should call the get post code data function', function(){
+    it('should be able to get the data from the data store', function() {
+    	spyOn(scope,'saveWeather').and.callFake(function(){
+        	return 'nothing';
+        });
+    	// check it
+    	expect(scope.data).toBeDefined();
+    });
 
-        this.$httpBackend.expectGET('http://api.worldweatheronline.com/free/v2/weather.ashx?q=PE29%202BN&format=json&num_of_days=5&key=39599866ca63e00d5c52e853caeb2').respond(this.dummyWeatherData);
+    it('should get the weather data if it does not exist', function() {
+	 	spyOn(scope,'saveWeather').and.callFake(function(){
+        	return 'nothing';
+        });
+    	expect(scope.saveWeather).toHaveBeenCalled();
+    });
 
-        spyOn(this.worldWeatherOnline, 'getPostCodeData').and.callThrough();
+    it('should check the timestamp of when it last got the weather and not get it unless three hours have passed', function(){
+    	spyOn(scope,'saveWeather').and.callFake(function(){
+        	return 'nothing';
+        });
+    	userData.saveWeather(dummyWeatherData);
+    	expect(scope.saveWeather).toHaveBeenCalled().toBe(false);
+    });
 
-        // run the get weather function in the controller
-        this.scope.getWeather('PE29 2BN');
+    it('should now get the weather data again and redirect te user back to the main page, showing a notification', function(){
+    	
+    	userData.saveWeather(dummyWeatherData);
+    	spyOn(scope,'saveWeather').and.callFake(function(){
+        	return 'nothing';
+        });
 
-        this.$httpBackend.flush();
+    	spyOn($location, 'path');
+    	spyOn(growl, 'success').and.returnValue(1);
 
-        this.scope.$root.$digest();
+    	// set the timestamp for over three hours ago
+    	var now = new Date().getTime(),
+    		then = now - 10800010;
 
-        expect(this.worldWeatherOnline.getPostCodeData).toHaveBeenCalled();
+    	userData.setLastWeatherTime(then);
+    	userData.save();
+
+    	expect(scope.saveWeather).toHaveBeenCalled();
+    	expect($location.path).toHaveBeenCalledWith('/');
+    	expect(growl.success).toHaveBeenCalledWith('Weather data updated');
 
     });
 
-    
-    it('should be able to get data from the weather service API', function() {
-
-        this.$httpBackend.expectGET('http://api.worldweatheronline.com/free/v2/weather.ashx?q=PE29%202BN&format=json&num_of_days=5&key=39599866ca63e00d5c52e853caeb2').respond(this.dummyWeatherData);
-
-        this.scope.getWeather('PE29 2BN');
-
-        this.$httpBackend.flush();
-
-        this.scope.$root.$digest();
-
-        expect(this.scope.weatherData.data).toBeDefined();
-        // should have first day of weather
-        expect(this.scope.weatherData.data.weather[0]).toBeDefined();
-        
-        // should have last day of weather
-        expect(this.scope.weatherData.data .weather[4]).toBeDefined();
-        
-    });
 
 });
     
