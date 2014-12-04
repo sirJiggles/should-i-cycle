@@ -5,3 +5,13 @@
 	width: $width;
 	height: $height;
 }
+
+@mixin block-left(){
+	display: block;
+	float: left;
+}
+
+@mixin reset-box(){
+	padding: 0;
+	margin: 0;
+}

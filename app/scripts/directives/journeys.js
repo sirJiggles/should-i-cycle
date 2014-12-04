@@ -87,7 +87,6 @@ angular.module('shouldICycleApp')
 		  					} else if (code === 113) {
 		  						weatherIcon = 'wi-day-sunny';
 		  					} else {
-		  						console.log(code);
 		  						weatherIcon = 'wi-meteor';
 		  					}
 
@@ -154,12 +153,6 @@ angular.module('shouldICycleApp')
 		  				scope.weather = weather;
 		  			}
 		  		}
-
-
-				// as we are clicking icons and not links
-				scope.naviateTo = function(path) {
-					$location.path(path);
-				};
 			}
 		};
 	});

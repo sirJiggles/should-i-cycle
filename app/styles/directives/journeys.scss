@@ -1,0 +1,106 @@
+@import "compass/css3";
+@import "includes/_mixins";
+@import "includes/_vars";
+
+
+// the journeys accordian
+.journeys {
+	margin-bottom: 20px;
+	position: relative;
+
+	&:after {
+		@include pseudoShape(100%, 100%);
+		background-color: white;
+		@include opacity(0.1);
+		display: block;
+		z-index: 1;
+		top: 0;
+		left: 0;
+	}
+
+	ul {
+		list-style-type: none;
+		@include reset-box;
+		color: black;
+		position: relative;
+		z-index: 2;
+
+		li {
+			display: block;
+			@include reset-box;
+			width: 100%;
+
+			&:last-child {
+				article {
+					border-bottom: none;
+				}
+			}
+
+			a{
+				display: block;
+			}
+		}
+	}
+
+	h2 {
+		display: inline-block;
+		color: white;
+
+		&:nth-child(2){
+			float: right;
+		}
+	}
+
+	article {
+		padding: 0 5%;
+		padding-bottom: 20px;
+		border-bottom: 1px solid black;
+	}
+
+	.descr {
+		p {
+			display: inline-block;
+			@include reset-box;
+			font-size: 1.7em;
+		}
+		i {
+			font-size: 10.0em;
+			float: right;
+		}
+	}
+
+	.temp {
+		font-size: 6.0em;
+		top: -15px;
+		position: relative;
+	}
+
+	.stats {
+		li {
+			width: 30%;
+			font-size: 1.7em;
+			text-align: center;
+			display: inline-block;
+		}
+	}
+
+	.crud-journey {
+		margin-top: 20px;
+
+		li {
+			display: inline-block;
+			width: auto;
+
+			&:nth-child(2) {
+				float: right;
+			}
+		}
+
+		.fa-trash,
+		.fa-edit {
+			font-size: 3em;
+			display: block;
+			color: white;
+		}
+	}
+}

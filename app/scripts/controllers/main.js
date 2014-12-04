@@ -13,10 +13,17 @@ angular.module('shouldICycleApp')
 	  	// get the local storage data
 	  	$scope.data = userData.getData();
 
-	  	console.log($scope.data);
-
 	  	// so we know what button to show on the reg form
 	  	$scope.register = true;
+
+	  	//function to save weather
+	  	$scope.saveWeather = function() {
+	  		worldWeatherOnline.getPostCodeData(userData.getPostCode()).then(function(data) {
+				userData.saveWeather(data);
+				$location.path('/');
+				growl.success('Weather data updated');
+			});
+	  	};
 
   		// check the last time we got the weather, if it was more than three hours ago or not at all then get it again
   		if(userData.getRegistered()) {
@@ -33,14 +40,7 @@ angular.module('shouldICycleApp')
 			}
   		}
 
-	  	//function to save weather
-	  	$scope.saveWeather = function() {
-	  		worldWeatherOnline.getPostCodeData(userData.getPostCode()).then(function(data) {
-				userData.saveWeather(data);
-				$location.path('/');
-				growl.success('Weather data updated');
-			});
-	  	};
+	  	
 
 	  	/* 
 	  	data

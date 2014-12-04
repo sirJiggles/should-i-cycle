@@ -9,44 +9,36 @@
 
 				<!-- show all of the weather data for this journey, the logic for this is handled in the main controller -->
 				<div class="weather">
-					<div class="temp">
-						{{weather[$index].tempC}} <i class="wi wi-celsius"></i>
+					<div class="descr">
+						<p>{{weather[$index].descr}}</p>
+						<i class="wi {{weather[$index].icon}} weather-icon"></i>
 					</div>
-					<i class="wi {{weather[$index].icon}} weather-icon"></i>
-					<ul>
+					<div class="temp">
+						{{weather[$index].tempC}}<i class="wi wi-celsius"></i>
+					</div>
+					
+					<ul class="stats">
 						<li class="rain">
 							<i class="fa fa-umbrella"></i> {{weather[$index].chanceofrain}}%
 						</li>
 						<li class="wind">
-							<i class="wi wi-strong-wind"></i> {{weather[$index].windspeedMiles}} Mph
+							<i class="wi wi-strong-wind"></i> {{weather[$index].windspeedMiles}}Mph
 						</li>
 						<li class="wind-dir">
 							<i class="wi {{weather[$index].windDirIcon}}"></i> {{weather[$index].winddir16Point}}
 						</li>
 					</ul>
-					<p>{{weather[$index].descr}}</p>
+					
 				</div>
 
 				<footer>
-					<ul>
-						<li><a href="/#/remove-journey/{{$index}}" title="Remove journey"><i class="fa fa-trash"></i></a></li>
+					<ul class="crud-journey">
 						<li><a href="/#/edit-journey/{{$index}}" title="Edit journey"><i class="fa fa-edit"></i></a></li>
+						<li><a href="/#/remove-journey/{{$index}}" title="Remove journey"><i class="fa fa-trash"></i></a></li>
 					</ul>
 				</footer>
 			</article>
 		</li>
 	</ul>
 
-
-	<!--
-	<accordion close-others="true">
-		<accordion-group ng-repeat="journey in data.journeys track by $index">
-			<accordion-heading>
-			    {{journey.time | date : 'HH:mm'}} - {{journey.name}}
-			    <i class="pull-right fa fa-trash" ng-click="naviateTo('/remove-journey/{{$index}}')"></i>
-			    <i class="pull-right fa fa-edit" ng-click="naviateTo('/edit-journey/{{$index}}')"></i>
-			</accordion-heading>
-			Weather data for the journey to go here!!
-		</accordion-group>
-  	</accordion> -->
 </div>

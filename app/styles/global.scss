@@ -1,0 +1,110 @@
+@import "compass/css3";
+@import "includes/_mixins";
+@import "includes/_vars";
+
+// Styles for the main layout of the site
+body {	
+	padding: 34px 0 20px 0;
+
+	&:before,
+	.glass {
+		@include pseudoShape(100%, 100%);
+		position: fixed;
+		top: 0;
+		left: 0;
+	}
+
+	&:before {
+		background: url('/images/bg.jpg') no-repeat center center fixed;
+		@include background-size(cover);
+	}
+
+	.glass {
+		background-color: black;
+		@include opacity(0.6);
+	}
+}
+
+// growl message overides
+.growl-container.growl-fixed.bottom-center {
+	left: auto !important;
+	margin: 0 !important;
+	right: 10px;
+}
+
+a {
+	text-decoration: none;
+
+	&:hover,
+	&:focus {
+		text-decoration: none;
+	}
+}
+
+// there can be only one!
+h1 {
+	text-align: center;
+	margin: 20px 0 20px 0;
+
+	a {
+		color: white;
+
+		&:hover,
+		&:focus {
+			color: white;
+		}
+	}
+}
+
+h3 {
+	text-align: center;
+	color: white;
+}
+
+.site-header {
+	background-color: $orange;
+	width: 100%;
+	display: block;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 3;
+
+	.home-link {
+		font-size: 1.7em;
+		color: white;
+	}
+}
+
+.settings-btn {
+	position: absolute;
+	top: -34px;
+	right: 0px;
+	color: white;
+	font-size: 1.7em;
+	text-decoration: none;
+	z-index: 3;
+
+	&:hover,
+	&:focus {
+		color: white;
+	}
+
+}
+
+// rows for the sign up form and buttons
+.input-group {
+	margin-bottom: 20px;
+}
+button.btn {
+	margin-bottom: 10px;
+}
+
+// strange that this is an issue
+.input-group-addon {
+	top: 0;
+}
+.btn {
+	width: 100%;
+	font-size: 1.7em;
+}
