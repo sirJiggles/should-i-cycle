@@ -13,8 +13,25 @@ angular.module('shouldICycleApp')
 	  	// get the local storage data
 	  	$scope.data = userData.getData();
 
+	  	console.log($scope.data);
+
 	  	// so we know what button to show on the reg form
 	  	$scope.register = true;
+
+  		// check the last time we got the weather, if it was more than three hours ago or not at all then get it again
+  		if(userData.getRegistered()) {
+			var lastTime = userData.getLastWeatherTime();
+			if(lastTime) {
+				var now = new Date().getTime(),
+					diff = now - lastTime;
+					// if three hours passed
+					if (diff > 10800000) {
+						$scope.saveWeather();
+					}
+			} else {
+				$scope.saveWeather();
+			}
+  		}
 
 	  	//function to save weather
 	  	$scope.saveWeather = function() {
@@ -39,20 +56,5 @@ angular.module('shouldICycleApp')
 		*/
 
 
-
-  		// check the last time we got the weather, if it was more than three hours ago or not at all then get it again
-  		if(userData.getRegistered()) {
-			var lastTime = userData.getLastWeatherTime();
-			if(lastTime) {
-				var now = new Date().getTime(),
-					diff = now - lastTime;
-					// if three hours passed
-					if (diff > 10800000) {
-						$scope.saveWeather();
-					}
-			} else {
-				$scope.saveWeather();
-			}
-  		}
 
   	});
