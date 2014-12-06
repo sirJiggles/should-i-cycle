@@ -4,7 +4,7 @@
 
 // Styles for the main layout of the site
 body {	
-	padding: 34px 0 20px 0;
+	padding: 55px 0 20px 0;
 
 	&:before,
 	.glass {
@@ -22,6 +22,29 @@ body {
 	.glass {
 		background-color: black;
 		@include opacity(0.6);
+	}
+
+	// using animate.css to animate the views changing
+	.main-view {
+		position: relative;
+
+		&.ng-enter {
+			@include animation(zoomIn 0.3s);
+			z-index: 8888;
+		}
+		&.ng-leave {
+			@include animation(zoomOut 0.1s);
+			z-index: 9999;
+		}
+
+		.view {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}
+
 	}
 }
 

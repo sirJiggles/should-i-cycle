@@ -15,6 +15,7 @@ angular.module('shouldICycleApp')
 			APIKey = '39599866ca63e00d5c52e853caeb2';
 
 		// get weather for postCode
+		// @TODO use ngResource for this bad boi
 		this.getPostCodeData = function(postCode) {
 
 			if(typeof postCode === 'undefined') {

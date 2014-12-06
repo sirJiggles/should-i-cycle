@@ -54,9 +54,9 @@ describe('Service: userData', function () {
     }));
 
     // Testing the API for the user data service
-    it('should return null if there is no data set in the local storage', function() {
+    it('should return empty object if there is no data set in the local storage', function() {
         var data = this.userData.getData();
-        expect(data).toBeNull();
+        expect(data).toEqual({});
     });
 
     // UPDATING DETAILS
@@ -274,6 +274,24 @@ describe('Service: userData', function () {
     	this.userData.saveWeather(dummyWeatherObj);
     	var timeLastSaved = this.userData.getLastWeatherTime();
     	expect(timeLastSaved).toBeDefined();
+    });
+
+    it('should be able to set a flag when the users have updated thier settings to true', function(){
+    	this.userData.setUpdatedSettings(true);
+    	var settingsFlag = this.userData.getUpdatedSettings();
+    	expect(settingsFlag).toBe(true);
+    });
+
+    it('should be able to set a flag when the users have updated thier settings to true, even if no arg passed', function(){
+    	this.userData.setUpdatedSettings();
+    	var settingsFlag = this.userData.getUpdatedSettings();
+    	expect(settingsFlag).toBe(true);
+    });
+
+    it('should be able to set a flag when the users have updated thier settings to false', function(){
+    	this.userData.setUpdatedSettings(false);
+    	var settingsFlag = this.userData.getUpdatedSettings();
+    	expect(settingsFlag).toBe(false);
     });
 
     

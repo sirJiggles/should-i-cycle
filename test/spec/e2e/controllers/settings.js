@@ -33,8 +33,10 @@ describe('Controller: SettingsCtrl', function() {
 	it('should allow the user to update settings correctly', function() {
 		browser.get(siteUrl+'/#/settings');
 		var nameInput = element(by.model('name'));
+		nameInput.clear();
 		nameInput.sendKeys('e2e User');
 		var postCodeInput = element(by.model('postCode'));
+		postCodeInput.clear();
 		postCodeInput.sendKeys('PE29 2BN');
 		element(by.css('.update-button')).click();
 		// expect to be re-directed out

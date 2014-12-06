@@ -8,6 +8,15 @@
  *
  * Main module of the application.
  */
+
+// controllers module
+
+
+// services module
+
+
+// directives module
+
 angular
 	.module('shouldICycleApp', [
 		'ngAnimate',

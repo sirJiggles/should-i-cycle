@@ -8,7 +8,7 @@
  * Controller of the shouldICycleApp
  */
 angular.module('shouldICycleApp')
-	.controller('MainCtrl', function ($scope, worldWeatherOnline, userData, $location, growl) {
+	.controller('MainCtrl', function ($scope, worldWeatherOnline, userData, $location, growl, $route) {
 		
 	  	// get the local storage data
 	  	$scope.data = userData.getData();
@@ -19,24 +19,35 @@ angular.module('shouldICycleApp')
 	  	//function to save weather
 	  	$scope.saveWeather = function() {
 	  		worldWeatherOnline.getPostCodeData(userData.getPostCode()).then(function(data) {
-				userData.saveWeather(data);
-				$location.path('/');
-				growl.success('Weather data updated');
+	  			if(data.data.error) {
+	  				growl.error(data.data.error[0].msg);
+	  			} else {
+					userData.saveWeather(data);
+					growl.success('Weather data updated');
+					$route.reload();
+	  			}
+
 			});
 	  	};
 
   		// check the last time we got the weather, if it was more than three hours ago or not at all then get it again
   		if(userData.getRegistered()) {
-			var lastTime = userData.getLastWeatherTime();
-			if(lastTime) {
-				var now = new Date().getTime(),
-					diff = now - lastTime;
+  			if(!userData.getUpdatedSettings()) {
+				var lastTime = userData.getLastWeatherTime();
+				if(lastTime) {
+					var now = new Date().getTime(),
+						diff = now - lastTime;
 					// if three hours passed
 					if (diff > 10800000) {
 						$scope.saveWeather();
 					}
+				} else {
+					$scope.saveWeather();
+				}
 			} else {
 				$scope.saveWeather();
+				userData.setUpdatedSettings(false);
+				userData.save();
 			}
   		}
 

@@ -42,6 +42,7 @@ angular.module('shouldICycleApp')
 
 			this.setPostCode(postCode);
 			this.setName(name);
+			this.setUpdatedSettings(true);
 			this.save();
 			return true;
 		};
@@ -56,7 +57,21 @@ angular.module('shouldICycleApp')
 		};
 
 		this.getRegistered =  function() {
+			userData = userData || {};
 			return (userData.registered) ? userData.registered : false;
+		};
+
+		this.setUpdatedSettings = function(value) {
+			userData = userData || {};
+			if(typeof value === 'undefined') {
+				value = true;
+			}
+			userData.settingsUpdated = value;
+		};
+
+		this.getUpdatedSettings = function(){
+			userData = userData || {};
+			return (userData.settingsUpdated) ? userData.settingsUpdated : false;
 		};
 
 		this.setPostCode = function(postCode) {
@@ -65,6 +80,7 @@ angular.module('shouldICycleApp')
 		};
 
 		this.getPostCode = function() {
+			userData = userData || {};
 			return (userData.postCode) ? userData.postCode : false;
 		};
 
@@ -74,6 +90,7 @@ angular.module('shouldICycleApp')
 		};
 
 		this.getName = function() {
+			userData = userData || {};
 			return (userData.name) ? userData.name : false;
 		};
 
@@ -139,14 +156,17 @@ angular.module('shouldICycleApp')
 		};
 
 		this.getJourney = function(index) {
+			userData = userData || {};
 			return (userData.journeys[index]) ? userData.journeys[index] : false;
 		};
 
 		this.getJourneys = function() {
+			userData = userData || {};
 			return (userData.journeys) ? userData.journeys : false;
 		};
 
 		this.getData = function(){
+			userData = userData || {};
 			return userData;
 		};
 
@@ -175,6 +195,7 @@ angular.module('shouldICycleApp')
 		};
 
 		this.getWeather = function() {
+			userData = userData || {};
 			return (userData.weather) ? userData.weather : false;
 		};
 
@@ -183,6 +204,7 @@ angular.module('shouldICycleApp')
 		};
 
 		this.getLastWeatherTime = function() {
+			userData = userData || {};
 			return (userData.lastWeatherTime) ? userData.lastWeatherTime : false;
 		};
 

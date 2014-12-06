@@ -64,8 +64,11 @@
 			font-size: 1.7em;
 		}
 		i {
-			font-size: 10.0em;
+			font-size: 8.0em;
 			float: right;
+			position: relative;
+			top: 6px;
+			right: 10px;
 		}
 	}
 
@@ -77,7 +80,7 @@
 
 	.stats {
 		li {
-			width: 30%;
+			width: 32%;
 			font-size: 1.7em;
 			text-align: center;
 			display: inline-block;
@@ -101,6 +104,39 @@
 			font-size: 3em;
 			display: block;
 			color: white;
+		}
+	}
+}
+
+@media only screen and (max-width:500px) {
+	.journeys {
+		h2 {
+			width: 100%;
+			font-size: 1.7em;
+			text-align: center;
+
+			&:nth-child(2) {
+				margin-top: 0;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	.journeys {
+		.temp {
+			font-size: 4.0em;
+		}
+		.stats{
+			li {
+				font-size: 1.0em;
+				margin-top: 15px;
+			}
+		}
+		.descr {
+			i {
+				font-size: 7.0em;
+			}
 		}
 	}
 }
