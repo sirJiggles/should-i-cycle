@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc function
- * @name shouldICycleApp.controller:AddJourneyCtrl
+ * @name shouldICycleApp.controller:EditJourneyCtrl
  * @description
- * # AddJourneyCtrl
+ * # EditJourneyCtrl
  * Controller of the shouldICycleApp
  */
 angular.module('shouldICycleApp')
-	.controller('AddJourneyCtrl', function ($scope, userData) {
+	.controller('EditJourneyCtrl', function ($scope, userData) {
 		// get the stored data for the user
 		$scope.data = userData.getData();
-		$scope.formMode = 'add';
+		$scope.formMode = 'edit';
   	});

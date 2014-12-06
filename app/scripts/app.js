@@ -8,6 +8,15 @@
  *
  * Main module of the application.
  */
+
+// controllers module
+
+
+// services module
+
+
+// directives module
+
 angular
 	.module('shouldICycleApp', [
 		'ngAnimate',
@@ -26,8 +35,20 @@ angular
 				controller: 'MainCtrl'
 			})
 			.when('/add-journey', {
-				templateUrl: 'views/add-journey.html',
+				templateUrl: 'views/journey.html',
 				controller: 'AddJourneyCtrl'
+			})
+			.when('/edit-journey/:id', {
+				templateUrl: 'views/journey.html',
+				controller: 'EditJourneyCtrl'
+			})
+			.when('/remove-journey/:id', {
+				templateUrl: 'views/remove-confirm.html',
+				controller: 'RemoveJourneyCtrl'
+			})
+			.when('/settings', {
+				templateUrl: 'views/settings.html',
+				controller: 'SettingsCtrl'
 			})
 			.otherwise({
 				redirectTo: '/404.html'

@@ -10,20 +10,28 @@
 angular.module('shouldICycleApp')
 	.service('worldWeatherOnline', function ($http, $log, $q) {
 		
-
 		// api end point and key can be used for various calls
 		var APIEndPoint = 'http://api.worldweatheronline.com/free/v2/weather.ashx?q=',
 			APIKey = '39599866ca63e00d5c52e853caeb2';
 
 		// get weather for postCode
+		// @TODO use ngResource for this bad boi
 		this.getPostCodeData = function(postCode) {
+
+			if(typeof postCode === 'undefined') {
+				return false;
+			}
+			if(postCode === '') {
+				return false;
+			}
+			
 			// uri encode the post code for the API
 			var encodedPostCode = encodeURIComponent(postCode);
 
 			// create our own promise for the http get :D
 			var deferred = $q.defer();
 
-			$http.get(APIEndPoint+encodedPostCode+'&format=json&num_of_days=5&key='+APIKey).
+			$http.get(APIEndPoint+encodedPostCode+'&format=json&num_of_days=1&key='+APIKey).
 				success(function(data) { 
 				  	deferred.resolve(data);
 				}).error(function(msg, code) {

@@ -42,7 +42,7 @@ module.exports = function (grunt) {
       },
       jsTest: {
         files: ['test/spec/**/**/*.js'],
-        tasks: ['newer:jshint:test', 'karma', 'protractor']
+        tasks: ['newer:jshint:test', 'karma', 'protractor_webdriver', 'protractor']
       },
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -68,7 +68,7 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        hostname: '192.168.0.4',
         livereload: 35729
       },
       livereload: {
@@ -388,7 +388,7 @@ module.exports = function (grunt) {
 
     protractor: {
 		options: {
-			configFile: "node_modules/protractor/referenceConf.js", // Default config file
+			configFile: 'node_modules/protractor/referenceConf.js', // Default config file
 			keepAlive: true, // If false, the grunt process stops when the test fails.
 			noColor: false, // If true, protractor will not use colors in its output.
 			args: {
@@ -397,7 +397,7 @@ module.exports = function (grunt) {
 		},
 		default: {   // Grunt requires at least one target to run so you can simply put 'all: {}' here too.
 			options: {
-				configFile: "test/e2e.conf.js", // Target-specific config file
+				configFile: 'test/e2e.conf.js', // Target-specific config file
 				args: {} // Target-specific arguments
 			}
 		},

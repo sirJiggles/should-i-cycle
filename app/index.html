@@ -8,6 +8,9 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/weather-icons/css/weather-icons.css" />
+    <link rel="stylesheet" href="bower_components/weather-icons/css/weather-icons.min.css" />
+    <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -25,22 +28,29 @@
     <!-- the opacity bg -->
     <div class="glass"></div>
 
+    <header class="site-header">
+    	<div class="container">
+    		<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<a href="/#/" title="Home" class="home-link"><i class="fa fa-home"></i></a>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</header>
+
     <section class="container">
 
     	<div class="col-md-3"></div>
     	<div class="col-md-6">
-	      	<header class="row">
-				<h1><a href="/#/" title="Home">Should I Cycle?</a></h1>
-	      	</header>
-
+    	
 	      	<!-- flash messages -->
 			<div growl></div>
 
-			<div ng-view="">
-
+			<div ng-view="" class="main-view">
+				
 			</div>
 
-			<footer></footer>
+			
 		</div>
 		<div class="col-md-3"></div>
     </section>
@@ -86,16 +96,19 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/add-journey.js"></script>
+    <script src="scripts/controllers/edit-journey.js"></script>
+    <script src="scripts/controllers/remove-journey.js"></script>
+    <script src="scripts/controllers/settings.js"></script>
 
     <script src="scripts/services/world-weather-online.js"></script>
     <script src="scripts/services/user-data.js"></script>
 
     <script src="scripts/directives/register-form.js"></script>
     <script src="scripts/directives/add-journey.js"></script>
-    <script src="scripts/directives/add-journey-form.js"></script>
+    <script src="scripts/directives/journey-form.js"></script>
     <script src="scripts/directives/journeys.js"></script>
-
-    
+    <script src="scripts/directives/remove-confirm.js"></script>
+    <script src="scripts/directives/settings-button.js"></script>
     <!-- endbuild -->
 </body>
 </html>
