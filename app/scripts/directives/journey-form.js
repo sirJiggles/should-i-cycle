@@ -23,7 +23,7 @@ angular.module('shouldICycleApp')
 					if (journey) {
 						scope.journeyName = journey.name;
 						scope.journeyTime = new Date(journey.time);
-					}else {
+					} else {
 						$location.path('/');
 						growl.warning('Could not find a journey with that ID', {title: 'Warning'});
 					}

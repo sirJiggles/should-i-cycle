@@ -40,6 +40,42 @@ describe('Service: userData', function () {
 						windspeedMiles: '6'
 					}
 				]
+			},
+			{
+				maxtempC: '15',
+				mintempC: '2',
+				hourly: [
+					{
+						time: '0',
+						tempC: '3',
+						weatherDesc: [
+							{
+								value: 'some weather description TWO'
+							}
+						],
+						windspeedMiles: '3'
+					},
+					{
+						time: '300',
+						tempC: '4',
+						weatherDesc: [
+							{
+								value: 'another weather description TWO'
+							}
+						],
+						windspeedMiles: '5'
+					},
+					{
+						time: '600',
+						tempC: '5',
+						weatherDesc: [
+							{
+								value: 'and again weather description TWO'
+							}
+						],
+						windspeedMiles: '6'
+					}
+				]
 			}]
 		}
 	};
@@ -243,15 +279,11 @@ describe('Service: userData', function () {
     	expect(weatherOperation).toBe(false);
 
 
-    	weatherObj.data.weather[0].hourly = [];
+    	weatherObj.data.weather[0] = {};
     	weatherOperation = this.userData.saveWeather(weatherObj);
     	expect(weatherOperation).toBe(false);
 
-    	weatherObj.data.weather[0].mintempC = '23';
-    	weatherOperation = this.userData.saveWeather(weatherObj);
-    	expect(weatherOperation).toBe(false);
-
-    	weatherObj.data.weather[0].maxtempC = '34';
+    	weatherObj.data.weather[1] = {};
     	weatherOperation = this.userData.saveWeather(weatherObj);
     	expect(weatherOperation).toBe(true);
     });
@@ -262,11 +294,24 @@ describe('Service: userData', function () {
 
     	expect(weatherOperation).toBe(true);
     	expect(weatherData).toBeDefined();
-    	expect(weatherData.maxtempC).toBeDefined();
-    	expect(weatherData.mintempC).toBeDefined();
-    	expect(weatherData.hourly).toBeDefined();
-    	expect(weatherData.hourly[0]).toBeDefined();
-    	expect(weatherData.hourly[2]).toBeDefined();
+    	expect(weatherData[0].maxtempC).toBeDefined();
+    	expect(weatherData[0].mintempC).toBeDefined();
+    	expect(weatherData[0].hourly).toBeDefined();
+    	expect(weatherData[0].hourly[0]).toBeDefined();
+    	expect(weatherData[0].hourly[2]).toBeDefined();
+    });
+
+    it('should be able to store tomorrows weather', function(){
+		var weatherOperation = this.userData.saveWeather(dummyWeatherObj),
+    		weatherData = this.userData.getWeather();
+
+    	expect(weatherOperation).toBe(true);
+    	expect(weatherData).toBeDefined();
+    	expect(weatherData[1].maxtempC).toBeDefined();
+    	expect(weatherData[1].mintempC).toBeDefined();
+    	expect(weatherData[1].hourly).toBeDefined();
+    	expect(weatherData[1].hourly[0]).toBeDefined();
+    	expect(weatherData[1].hourly[2]).toBeDefined();
     });
 
     // time stamp that saves when we last checked the weather
@@ -293,8 +338,6 @@ describe('Service: userData', function () {
     	var settingsFlag = this.userData.getUpdatedSettings();
     	expect(settingsFlag).toBe(false);
     });
-
-    
 
 });
     

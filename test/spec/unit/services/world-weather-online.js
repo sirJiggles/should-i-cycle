@@ -13,6 +13,11 @@ describe('Service: worldWeatherOnline', function () {
 					maxtempC: '10',
 					mintempC: '3',
 					hourly: [1,2,3,4,5]
+    			},
+    			{
+					maxtempC: '14',
+					mintempC: '2',
+					hourly: [1,2,3,4,5]
     			}]
 			}
 		};
@@ -36,19 +41,18 @@ describe('Service: worldWeatherOnline', function () {
 
     it('should call the get post code data function', function(){
 
-        $httpBackend.expectGET('http://api.worldweatheronline.com/free/v2/weather.ashx?q=PE29%202BN&format=json&num_of_days=1&key=39599866ca63e00d5c52e853caeb2').respond(dummyWeatherData);
+        $httpBackend.expectGET('http://api.worldweatheronline.com/free/v2/weather.ashx?q=PE29%202BN&format=json&num_of_days=2&key=39599866ca63e00d5c52e853caeb2').respond(dummyWeatherData);
         spyOn(worldWeatherOnline, 'getPostCodeData').and.callThrough();
 
         // run the get weather function in the controller
         worldWeatherOnline.getPostCodeData('PE29 2BN');
         $httpBackend.flush();
         expect(worldWeatherOnline.getPostCodeData).toHaveBeenCalled();
-
     });
 
     
     it('should be able to get data from the weather service API', function() {
-    	$httpBackend.expectGET('http://api.worldweatheronline.com/free/v2/weather.ashx?q=PE29%202BN&format=json&num_of_days=1&key=39599866ca63e00d5c52e853caeb2').respond(dummyWeatherData);
+    	$httpBackend.expectGET('http://api.worldweatheronline.com/free/v2/weather.ashx?q=PE29%202BN&format=json&num_of_days=2&key=39599866ca63e00d5c52e853caeb2').respond(dummyWeatherData);
     	spyOn(worldWeatherOnline, 'getPostCodeData').and.callThrough();
 
         var weatherData = worldWeatherOnline.getPostCodeData('PE29 2BN');

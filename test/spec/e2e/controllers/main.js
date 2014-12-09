@@ -10,6 +10,7 @@ describe('Controller: MainCtrl', function() {
 		expect(element(by.css('.add-journey')).isDisplayed()).toBe(false);
 		expect(element(by.css('.journeys')).isDisplayed()).toBe(false);
 		expect(element(by.css('.cancel-button')).isDisplayed()).toBe(false);
+		expect(element(by.css('.settings-btn')).isDisplayed()).toBe(false);
 	});
 
 	it('should not allow the user to register unless both inputs are filled in', function(){
@@ -36,6 +37,7 @@ describe('Controller: MainCtrl', function() {
 		element(by.css('.register-button')).click();
 		// expect to see the add journey button now we have registered
 		expect(element(by.css('.add-journey')).isDisplayed()).toBe(true);
+		expect(element(by.css('.settings-btn')).isDisplayed()).toBe(true);
 	});
 
 });

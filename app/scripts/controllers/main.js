@@ -8,17 +8,21 @@
  * Controller of the shouldICycleApp
  */
 angular.module('shouldICycleApp')
-	.controller('MainCtrl', function ($scope, worldWeatherOnline, userData, $location, growl, $route) {
-		
-	  	// get the local storage data
-	  	$scope.data = userData.getData();
+	.controller('MainCtrl', function ($scope, worldWeatherOnline, userData, $location, growl, $route, $rootScope) {
 
+		$scope.data = userData.getData();
+
+		console.log($scope.data);
+		
 	  	// so we know what button to show on the reg form
 	  	$scope.register = true;
+
+	  	$rootScope.registered = userData.getRegistered();
 
 	  	//function to save weather
 	  	$scope.saveWeather = function() {
 	  		worldWeatherOnline.getPostCodeData(userData.getPostCode()).then(function(data) {
+
 	  			if(data.data.error) {
 	  				growl.error(data.data.error[0].msg);
 	  			} else {

@@ -31,7 +31,7 @@ angular.module('shouldICycleApp')
 			// create our own promise for the http get :D
 			var deferred = $q.defer();
 
-			$http.get(APIEndPoint+encodedPostCode+'&format=json&num_of_days=1&key='+APIKey).
+			$http.get(APIEndPoint+encodedPostCode+'&format=json&num_of_days=2&key='+APIKey).
 				success(function(data) { 
 				  	deferred.resolve(data);
 				}).error(function(msg, code) {

@@ -22,7 +22,9 @@ angular.module('shouldICycleApp')
 		  		if(data.weather && data.journeys) {
 		  			if(data.journeys.length > 0) {
 	  					// our tmp container
-		  				var weather = [];
+		  				var weather = [],
+		  					dayIndex = 0,
+		  					currentTime = new Date().getHours();
 
 		  				for (var i = 0; i < data.journeys.length; i++) {
 
@@ -32,7 +34,14 @@ angular.module('shouldICycleApp')
 		  					var journeyTime = new Date(data.journeys[i].time).getHours(),
 		  						hourSeg = 0,
 		  						weatherIcon = '',
-		  						windDirIcon = '';
+		  						windDirIcon = '',
+		  						diff = currentTime - journeyTime;
+
+  							// check journey time has already passed by 1 hour (avrg journey time)
+							dayIndex = (diff >= 1) ? 1 : 0;
+
+							// so we can display what day the weather is for
+							weather[i].day = (dayIndex === 0) ? 'Today' : 'Tomorrow';
 
 	  						if(journeyTime <= 2) {
 	  							hourSeg = 0;
@@ -53,13 +62,13 @@ angular.module('shouldICycleApp')
 	  						}
 
 	  						// now we can set some values
-	  						weather[i].chanceofrain = data.weather.hourly[hourSeg].chanceofrain;
-	  						weather[i].tempC = data.weather.hourly[hourSeg].tempC;
-	  						weather[i].windspeedMiles = data.weather.hourly[hourSeg].windspeedMiles;
-	  						weather[i].winddir16Point = data.weather.hourly[hourSeg].winddir16Point;
-	  						weather[i].descr = data.weather.hourly[hourSeg].weatherDesc[0].value;
+	  						weather[i].chanceofrain = data.weather[dayIndex].hourly[hourSeg].chanceofrain;
+	  						weather[i].tempC = data.weather[dayIndex].hourly[hourSeg].tempC;
+	  						weather[i].windspeedMiles = data.weather[dayIndex].hourly[hourSeg].windspeedMiles;
+	  						weather[i].winddir16Point = data.weather[dayIndex].hourly[hourSeg].winddir16Point;
+	  						weather[i].descr = data.weather[dayIndex].hourly[hourSeg].weatherDesc[0].value;
 
-	  						var code = parseInt(data.weather.hourly[hourSeg].weatherCode);
+	  						var code = parseInt(data.weather[dayIndex].hourly[hourSeg].weatherCode);
 
 		  					// logic for working out which weather icon to use (based on the weather code from the API)
 		  					if(code === 395 || code === 392) {
@@ -93,7 +102,7 @@ angular.module('shouldICycleApp')
 		  					weather[i].icon = weatherIcon;
 
 		  					// logic for working out the wind dir icon
-		  					var dir = parseInt(data.weather.hourly[hourSeg].winddirDegree);
+		  					var dir = parseInt(data.weather[dayIndex].hourly[hourSeg].winddirDegree);
 
 		  					if(dir < 15) {
 		  						windDirIcon = 'wi-wind-default _0-deg';

@@ -8,7 +8,7 @@
  * Directive in the shouldICycleApp.
  */
 angular.module('shouldICycleApp')
-	.directive('registerForm', function (userData, growl, $location) {
+	.directive('registerForm', function (userData, growl, $location, $rootScope) {
 		return {
 			restrict: 'E',
 			replace: true,
@@ -19,6 +19,8 @@ angular.module('shouldICycleApp')
 
 			    	if(!scope.data) {
 			    		growl.error('Unable to register, please try again.', {title:'Error'});
+			    	}else {
+			    		$rootScope.registered = true;
 			    	}
 	    		};
 	    		scope.updateSettings = function() {

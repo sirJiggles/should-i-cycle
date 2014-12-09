@@ -182,13 +182,12 @@ angular.module('shouldICycleApp')
 			}
 			if( typeof weatherData.data === 'undefined' ||
 				typeof weatherData.data.weather === 'undefined' ||
-				typeof weatherData.data.weather[0].mintempC === 'undefined' ||
-				typeof weatherData.data.weather[0].maxtempC === 'undefined' ||
-				typeof weatherData.data.weather[0].hourly === 'undefined') {
+				typeof weatherData.data.weather[0] === 'undefined' ||
+				typeof weatherData.data.weather[1] === 'undefined') {
 				return false;
 			}
 			userData = userData || {};
-			userData.weather = weatherData.data.weather[0];
+			userData.weather = weatherData.data.weather;
 			this.setLastWeatherTime(new Date().getTime());
 			this.save();
 			return true;

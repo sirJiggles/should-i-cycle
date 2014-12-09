@@ -29,11 +29,11 @@ body {
 		position: relative;
 
 		&.ng-enter {
-			@include animation(zoomIn 0.3s);
+			@include animation(fadeInRightBig 0.3s);
 			z-index: 8888;
 		}
 		&.ng-leave {
-			@include animation(zoomOut 0.1s);
+			@include animation(fadeOutLeftBig 0.3s);
 			z-index: 9999;
 		}
 
@@ -92,28 +92,20 @@ h3 {
 	left: 0;
 	top: 0;
 	z-index: 3;
+	@include box-shadow(0px 0px 5px 1px black);
 
-	.home-link {
+	.home-link,
+	.settings-btn {
 		font-size: 1.7em;
 		color: white;
 	}
-}
 
-.settings-btn {
-	position: absolute;
-	top: -34px;
-	right: 0px;
-	color: white;
-	font-size: 1.7em;
-	text-decoration: none;
-	z-index: 3;
-
-	&:hover,
-	&:focus {
-		color: white;
+	.settings-btn {
+		float: right;
 	}
-
 }
+
+
 
 // rows for the sign up form and buttons
 .input-group {
@@ -130,4 +122,8 @@ button.btn {
 .btn {
 	width: 100%;
 	font-size: 1.7em;
+}
+
+.hidden {
+	display: none;
 }

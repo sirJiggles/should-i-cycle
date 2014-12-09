@@ -1,4 +1,4 @@
-<div class="row journeys">
+<div class="journeys">
 	<ul>
 		<li ng-repeat="journey in data.journeys track by $index">
 			<article>
@@ -34,6 +34,7 @@
 				<footer>
 					<ul class="crud-journey">
 						<li><a href="/#/edit-journey/{{$index}}" title="Edit journey"><i class="fa fa-edit"></i></a></li>
+						<li><h3>{{weather[$index].day}}</h3></li>
 						<li><a href="/#/remove-journey/{{$index}}" title="Remove journey"><i class="fa fa-trash"></i></a></li>
 					</ul>
 				</footer>

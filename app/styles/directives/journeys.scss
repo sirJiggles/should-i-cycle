@@ -21,7 +21,8 @@
 	ul {
 		list-style-type: none;
 		@include reset-box;
-		color: black;
+		color: #F07800;
+		@include text-shadow(0px 3px 6px black);
 		position: relative;
 		z-index: 2;
 
@@ -89,13 +90,21 @@
 
 	.crud-journey {
 		margin-top: 20px;
+		position: relative;
 
 		li {
 			display: inline-block;
 			width: auto;
 
-			&:nth-child(2) {
+			&:nth-child(3) {
 				float: right;
+			}
+			&:nth-child(2){
+				position: absolute;
+				width: 100%;
+				left: 0;
+				top: 0;
+				z-index: -1;
 			}
 		}
 
@@ -104,6 +113,14 @@
 			font-size: 3em;
 			display: block;
 			color: white;
+		}
+
+		h3 {
+			width: 100%;
+			text-align: center;
+			margin-top: 10px;
+			font-size: 1.4em;
+			@include text-shadow(0px 0px 0px black);
 		}
 	}
 }
