@@ -31,6 +31,10 @@ describe('Directive: RegisterForm', function () {
     	spyOn(growl, 'warning').and.returnValue(3);
     }));
 
+    afterEach(function() {
+    	userData.clearData();
+	});
+
     it('should error if trying to reg a user without a name', function() {
     	scope.register = true;
     	scope.name = '';

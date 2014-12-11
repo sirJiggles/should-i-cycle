@@ -12,8 +12,6 @@ angular.module('shouldICycleApp')
 
 		$scope.data = userData.getData();
 
-		console.log($scope.data);
-		
 	  	// so we know what button to show on the reg form
 	  	$scope.register = true;
 

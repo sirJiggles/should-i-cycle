@@ -24,6 +24,8 @@ describe('Directive: JourneyForm', function () {
         $location = _$location_;
         $routeParams = _$routeParams_;
 
+        userData.registerUser('Gareth Fuller', 'PE29 2BN');
+
         // stop functions being called / settup spys
         element = angular.element('<journey-form></journey-form>');
         $compile(element)(scope);
@@ -34,6 +36,10 @@ describe('Directive: JourneyForm', function () {
     	spyOn(growl, 'error').and.returnValue(2);
     	spyOn(growl, 'warning').and.returnValue(3);
     }));
+
+    afterEach(function() {
+    	userData.clearData();
+	});
 
     it('should throw an error if there is no name set on the scope - on adding', function(){
     	scope.journeyTime = '23:20';
@@ -77,9 +83,11 @@ describe('Directive: JourneyForm', function () {
     });
 
     it('should error if the user tries to edit a journey with no name', function(){
+    	userData.addJourney('07:00', 'Journey One');
     	$routeParams.id = 0;
     	scope.journeyTime = '23:00';
     	scope.journeyName = '';
+
     	spyOn(scope, 'editJourney').and.callThrough();
     	
     	scope.editJourney();
@@ -89,6 +97,7 @@ describe('Directive: JourneyForm', function () {
     });
 
     it('should error if the user tries to edit a journey with no time', function(){
+    	userData.addJourney('07:00', 'Journey One');
     	$routeParams.id = 0;
     	scope.journeyTime = '';
     	scope.journeyName = 'Test Journey Edit';
@@ -101,6 +110,7 @@ describe('Directive: JourneyForm', function () {
     });
     
     it('should be able to edit a journey', function() {
+    	userData.addJourney('07:00', 'Journey One');
     	$routeParams.id = 0;
     	scope.journeyTime = '23:00';
     	scope.journeyName = 'Test Journey Edit';
