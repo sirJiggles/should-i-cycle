@@ -8,7 +8,7 @@
 				</header>
 
 				<!-- show all of the weather data for this journey, the logic for this is handled in the main controller -->
-				<div class="weather">
+				<div class="weather {{weather[$index].weatherClass}}">
 					<div class="descr">
 						<p>{{weather[$index].descr}}</p>
 						<i class="wi {{weather[$index].icon}} weather-icon"></i>

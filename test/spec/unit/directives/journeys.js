@@ -341,4 +341,70 @@ describe('Directive: Journeys', function () {
 
     });
 
+	it('should set a color prop on the weather if it is going to be good bad or ok', function(){
+		
+		var weather = [{
+				chanceofrain: 20,
+				tempC: 4,
+				windspeedMiles: 10
+			},
+			{
+				chanceofrain: 10,
+				tempC: 5,
+				windspeedMiles: 5
+			},
+			{
+				chanceofrain: 30,
+				tempC: 0,
+				windspeedMiles: 20
+			},
+			{
+				chanceofrain: 2,
+				tempC: 1,
+				windspeedMiles: 4
+			},
+			{
+				chanceofrain: 80,
+				tempC: 20,
+				windspeedMiles: 4
+			},
+			{
+				chanceofrain: 3,
+				tempC: 15,
+				windspeedMiles: 4
+			}];
+
+		// this is the code that will go into the directive
+		var testWeather = function(data) {
+			var type = '';
+
+			if (data.chanceofrain > 20 || data.tempC < 0 || data.windspeedMiles > 15) {
+				type = 'bad';
+			} else if ( (data.chanceofrain < 21 && data.chanceofrain > 12) || 
+						(data.tempC > 0 && data.tempC < 10) || 
+						(data.windspeedMiles < 15 && data.windspeedMiles > 6) ){
+				type = 'ok';
+			} else {
+				type = 'good';
+			}
+
+			return type;
+		};
+
+		var testOne = testWeather(weather[0]),
+			testTwo = testWeather(weather[1]),
+			testThree = testWeather(weather[2]),
+			testFour = testWeather(weather[3]),
+			testFive = testWeather(weather[4]),
+			testSix = testWeather(weather[5]);
+
+		expect(testOne).toEqual('ok');
+		expect(testTwo).toEqual('ok');
+		expect(testThree).toEqual('bad');
+		expect(testFour).toEqual('ok');
+		expect(testFive).toEqual('bad');
+		expect(testSix).toEqual('good');
+
+	});
+
 });
