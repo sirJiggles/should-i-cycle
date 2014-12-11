@@ -23,29 +23,6 @@ body {
 		background-color: black;
 		@include opacity(0.6);
 	}
-
-	// using animate.css to animate the views changing
-	.main-view {
-		position: relative;
-
-		&.ng-enter {
-			@include animation(fadeInRightBig 0.3s);
-			z-index: 8888;
-		}
-		&.ng-leave {
-			@include animation(fadeOutLeftBig 0.3s);
-			z-index: 9999;
-		}
-
-		.view {
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-		}
-
-	}
 }
 
 // growl message overides
