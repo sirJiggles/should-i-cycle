@@ -56,4 +56,10 @@ angular
 
       	growlProvider.globalTimeToLive(3000);
   		growlProvider.globalPosition('bottom-center growl-fixed');
+  	})
+  	.run(function ($rootScope){
+  		$rootScope.$on('$routeChangeSuccess',function(){
+  			// stop the flicker when scrolled part way down the screem and chnage view
+		    window.scrollTo(55,0);
+		});
   	});

@@ -24,11 +24,11 @@ angular.module('shouldICycleApp')
 							wind = parseInt(data.windspeedMiles),
 							temp = parseInt(data.tempC);
 
-						if (rain > 20 || temp < 0 || wind > 15) {
+						if (rain > 20 || temp < 0 || wind > 20) {
 							type = 'bad';
 						} else if ( (rain < 21 && rain > 12) || 
 									(temp > 0 && temp < 10) || 
-									(wind < 15 && wind > 6) ){
+									(wind < 21 && wind > 10) ){
 							type = 'ok';
 						} else {
 							type = 'good';

@@ -378,11 +378,11 @@ describe('Directive: Journeys', function () {
 		var testWeather = function(data) {
 			var type = '';
 
-			if (data.chanceofrain > 20 || data.tempC < 0 || data.windspeedMiles > 15) {
+			if (data.chanceofrain > 20 || data.tempC < 0 || data.windspeedMiles > 20) {
 				type = 'bad';
 			} else if ( (data.chanceofrain < 21 && data.chanceofrain > 12) || 
 						(data.tempC > 0 && data.tempC < 10) || 
-						(data.windspeedMiles < 15 && data.windspeedMiles > 6) ){
+						(data.windspeedMiles < 21 && data.windspeedMiles > 10) ){
 				type = 'ok';
 			} else {
 				type = 'good';

@@ -6,7 +6,7 @@
 
 	<div class="input-group input-group-lg">
         <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-        <input type="time" name="time" class="form-control" ng-model="journeyTime" required />
+        <input type="time" name="time" class="form-control" ng-model="journeyTime" required placeholder="23:00" />
     </div>
 
     <button type="button" ng-show="{{formMode == 'add'}}" class="btn btn-success add-journey-button" ng-disabled="journeyForm.$invalid" ng-click="addJourney()">
