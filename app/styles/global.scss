@@ -15,7 +15,7 @@ body {
 	}
 
 	&:before {
-		background: url('/images/bg.jpg') no-repeat center center fixed;
+		background: url('../images/bg.jpg') no-repeat center center fixed;
 		@include background-size(cover);
 	}
 

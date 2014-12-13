@@ -25,8 +25,7 @@ angular
 		'ngRoute',
 		'ngSanitize',
 		'ngTouch',
-		'angular-growl',
-		'ui.bootstrap'
+		'angular-growl'
 	])
 	.config(function ($routeProvider, growlProvider) {
 		$routeProvider
@@ -59,7 +58,7 @@ angular
   	})
   	.run(function ($rootScope){
   		$rootScope.$on('$routeChangeSuccess',function(){
-  			// stop the flicker when scrolled part way down the screem and chnage view
+  			// stop the flicker when scrolled part way down the screen and chnage view
 		    window.scrollTo(55,0);
 		});
   	});

@@ -8,14 +8,14 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-growl-v2/build/angular-growl.css" />
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/weather-icons/css/weather-icons.css" />
     <link rel="stylesheet" href="bower_components/weather-icons/css/weather-icons.min.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="bower_components/angular-growl-v2/build/angular-growl.css" />
-    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
     <!-- endbuild -->
   </head>
   <body ng-app="shouldICycleApp">
@@ -31,8 +31,8 @@
     	<div class="container">
     		<div class="col-md-3"></div>
 			<div class="col-md-6">
-				<a href="/#/" title="Home" class="home-link"><i class="fa fa-home"></i></a>
-				<a class="settings-btn" ng-cloak ng-show="registered" title="Settings" href="/#/settings">
+				<a href="#/" title="Home" class="home-link"><i class="fa fa-home"></i></a>
+				<a class="settings-btn" ng-cloak ng-show="registered" title="Settings" href="#/settings">
 					<i class="fa fa-gear"></i>
 				</a>
 			</div>
@@ -92,9 +92,6 @@
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="vendor/ui-bootstrap-custom-0.12.0.js"></script>
-    <script src="vendor/ui-bootstrap-custom-tpls-0.12.0.js"></script>
-    
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/add-journey.js"></script>
