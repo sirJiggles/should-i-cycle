@@ -153,20 +153,23 @@
 
 @media only screen and (max-width: 460px) {
 	.journeys {
-		.stats{
-			margin-top: 20px;
-
-			li {
-				margin: 0;
-				width: 100%;
-			}
-		}
 		.descr {
 			p {
 				width: 100%;
 			}
 			i {
 				font-size: 7.0em;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 430px) {
+
+	.journeys {
+		.stats{
+			li {
+				font-size: 1.0em;
 			}
 		}
 	}
